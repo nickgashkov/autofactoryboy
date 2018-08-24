@@ -5,10 +5,7 @@
 # Distributed under MIT License. See LICENSE file for details.
 from __future__ import unicode_literals
 
-# TODO: Raise detailed error if Django is not installed.
-from django.db import models
-
-from autofactory.autofactory.declarators.text import declare_text_field
+from autofactory.autofactory import builders
 
 
 class DjangoIntrospector(object):
@@ -16,22 +13,20 @@ class DjangoIntrospector(object):
         self.model = model
 
     def declare(self, field_attname):
-        return None
-
-    def get_declarator(self, field_attname):
         # TODO: Compatibility with older Django versions.
-        field = self.model.get_field(field_attname)
+        field = self.model._meta.get_field(field_attname)
         field_cls = type(field)
 
-        declarator_mapping = self.get_declarator_mapping()
-        declarator = declarator_mapping.get(field_cls)
+        builder = self.get_builder(field_cls)
 
-        if declarator is None:
-            raise TypeError("'{field_cls}' is not supported.".format(field_cls=field_cls.__name__))
+        return builder and builder(field)
 
-        return declarator
+    def get_builder(self, field_cls):
+        builder_name = "build_" + field_cls.__name__.lower()
+        builder = getattr(builders, builder_name, None)
 
-    def get_declarator_mapping(self):
-        return {
-            models.TextField: declare_text_field,
-        }
+        if builder is None:
+            # raise TypeError("'{field_cls}' is not supported.".format(field_cls=field_cls.__name__))
+            pass
+
+        return builder
