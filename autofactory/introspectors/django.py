@@ -38,7 +38,7 @@ class DjangoIntrospector(object):
 
     def get_case_builder(self, field):
         if field.choices:
-            return builders.casebuild_from_choices
+            return builders.from_choices
 
         return None
 

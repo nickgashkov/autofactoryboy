@@ -6,11 +6,11 @@
 from __future__ import unicode_literals
 
 from autofactory.autofactory.builders.bools import build_booleanfield, build_nullbooleanfield
+from autofactory.autofactory.builders.case import from_choices
 from autofactory.autofactory.builders.dates import (
     build_datefield, build_datetimefield, build_durationfield,
     build_timefield,
 )
-from autofactory.autofactory.builders.generic import build_from_choices
 from autofactory.autofactory.builders.misc import (
     build_binaryfield, build_filefield, build_filepathfield,
     build_imagefield,
@@ -39,12 +39,13 @@ __all__ = (
     "build_bigintegerfield",
     "build_binaryfield",
     "build_booleanfield",
+    "build_nullbooleanfield",
+    "from_choices",
     "build_charfield",
     "build_datefield",
     "build_datetimefield",
     "build_decimalfield",
     "build_durationfield",
-    "build_from_choices",
     "build_emailfield",
     "build_filefield",
     "build_filepathfield",

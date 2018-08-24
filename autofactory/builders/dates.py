@@ -5,20 +5,20 @@
 # Distributed under MIT License. See LICENSE file for details.
 from __future__ import unicode_literals
 
-import datetime
+import factory
 
 
 def build_datefield(field_cls):
-    return datetime.date.today()
+    return factory.Faker('date_this_decade')
 
 
 def build_datetimefield(field_cls):
-    return datetime.datetime.now()
+    return factory.Faker('date_time')
 
 
 def build_durationfield(field_cls):
-    return datetime.timedelta(1)
+    return factory.Faker('time_delta')
 
 
 def build_timefield(field_cls):
-    return datetime.time(1)
+    return factory.Faker('time_object')

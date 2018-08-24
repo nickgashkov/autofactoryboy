@@ -1,7 +1,7 @@
 from factory import random
 
 
-def casebuild_from_choices(field_cls):
+def from_choices(field_cls):
     random_choice_tuple = random.randgen.choice(field_cls.choices)
     random_choice = random_choice_tuple[0]
 
