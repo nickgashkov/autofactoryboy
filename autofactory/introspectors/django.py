@@ -10,5 +10,5 @@ class DjangoIntrospector(object):
     def __init__(self, model):
         self.model = model
 
-    def declare(self):
+    def declare(self, field_attname):
         return None
