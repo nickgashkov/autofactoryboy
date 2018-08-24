@@ -5,12 +5,12 @@
 # Distributed under MIT License. See LICENSE file for details.
 from __future__ import unicode_literals
 
-from autofactory.autofactory.builders.auto import build_autofield, build_bigautofield
 from autofactory.autofactory.builders.bools import build_booleanfield, build_nullbooleanfield
 from autofactory.autofactory.builders.dates import (
     build_datefield, build_datetimefield, build_durationfield,
     build_timefield,
 )
+from autofactory.autofactory.builders.generic import build_from_choices
 from autofactory.autofactory.builders.misc import (
     build_binaryfield, build_filefield, build_filepathfield,
     build_imagefield,
@@ -36,8 +36,6 @@ from autofactory.autofactory.builders.text import (
 
 
 __all__ = (
-    "build_autofield",
-    "build_bigautofield",
     "build_bigintegerfield",
     "build_binaryfield",
     "build_booleanfield",
@@ -46,6 +44,7 @@ __all__ = (
     "build_datetimefield",
     "build_decimalfield",
     "build_durationfield",
+    "build_from_choices",
     "build_emailfield",
     "build_filefield",
     "build_filepathfield",

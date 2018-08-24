@@ -25,23 +25,21 @@ class DjangoAutoOptions(DjangoOptions):
         return self._introspector_class(self.model)
 
     def get_autodeclarations(self, declarations):
-        autodeclarations = dict()
         introspecter = self.get_introspector()
 
         autofields = self.get_fields_to_autodeclare()
-        autofields = [f for f in autofields if f not in declarations]
+        autofields = [f for f in autofields if f.name not in declarations]
 
-        for field_attname in autofields:
-            autodeclarations[field_attname] = introspecter.declare(field_attname)
-
-        return autodeclarations
+        return introspecter.build_all(autofields)
 
     def get_fields_to_autodeclare(self):
-        if self.fields == "__all__":
-            # TODO: Make compatibility with previous Django versions.
-            return [f.name for f in self.model._meta.get_fields()]
+        # TODO: Make compatibility with previous Django versions.
+        all_fields = self.model._meta.get_fields()
 
-        return self.fields
+        if self.fields == "__all__":
+            return all_fields
+
+        return filter(lambda x: x.name in self.fields, all_fields)
 
     def _build_default_options(self):
         return super(DjangoAutoOptions, self)._build_default_options() + [
