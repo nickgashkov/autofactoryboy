@@ -5,9 +5,8 @@
 # Distributed under MIT License. See LICENSE file for details.
 from __future__ import unicode_literals
 
-from django.db import models
-
-from autofactory.autofactory import builders
+from autofactory import builders
+from autofactory.utils import compat
 
 
 class DjangoIntrospector(object):
@@ -29,24 +28,24 @@ class DjangoIntrospector(object):
         return built
 
     def get_builder(self, field):
-        builder = self.get_case_builder(field)
+        builder = self._get_concrete_builder(field)
 
         if builder is not None:
             return builder
 
-        return self.get_generic_builder(field)
+        return self._get_generic_builder(field)
 
-    def get_case_builder(self, field):
+    def _get_concrete_builder(self, field):
         if field.choices:
-            return builders.from_choices
+            return builders.django_.from_choices
 
         return None
 
-    def get_generic_builder(self, field):
+    def _get_generic_builder(self, field):
         field_cls = type(field)
 
         builder_name = "build_" + field_cls.__name__.lower()
-        builder = getattr(builders, builder_name, None)
+        builder = getattr(builders.django_, builder_name, None)
 
         if builder is None:
             raise TypeError("'{field_cls}' is not supported.".format(field_cls=field_cls.__name__))
@@ -54,9 +53,4 @@ class DjangoIntrospector(object):
         return builder
 
     def _is_concrete_field(self, field):
-        return field.__class__ not in [
-            models.AutoField,
-            models.BigAutoField,
-            models.ManyToOneRel,
-            models.ManyToManyRel,
-        ]
+        return field.__class__ not in compat.django_.get_generic_fields()

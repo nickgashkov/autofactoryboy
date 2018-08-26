@@ -4,6 +4,7 @@
 
 # Python cache.
 __pycache__
+*.pyc
 
 # Keep this gitignore.
 !.gitignore

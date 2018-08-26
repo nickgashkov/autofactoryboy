@@ -5,9 +5,9 @@
 # Distributed under MIT License. See LICENSE file for details.
 from __future__ import unicode_literals
 
-from autofactory.autofactory.factories.django import DjangoModelAutoFactory
-from autofactory.autofactory.introspectors.django import DjangoIntrospector
-from autofactory.autofactory.options.django import DjangoAutoOptions
+from autofactory.factories.django_ import DjangoModelAutoFactory
+from autofactory.introspectors.django_ import DjangoIntrospector
+from autofactory.options.django_ import DjangoAutoOptions
 
 __author__ = """Nick Gashkov"""
 __email__ = "nick@gashkov.com"

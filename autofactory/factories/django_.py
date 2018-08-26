@@ -7,7 +7,7 @@ from __future__ import unicode_literals
 
 from factory import DjangoModelFactory
 
-from autofactory.autofactory.options.django import DjangoAutoOptions
+from autofactory.options.django_ import DjangoAutoOptions
 
 
 class DjangoModelAutoFactory(DjangoModelFactory):

@@ -8,7 +8,8 @@ from __future__ import unicode_literals
 from factory.base import OptionDefault
 from factory.django import DjangoOptions
 
-from autofactory.autofactory.introspectors.django import DjangoIntrospector
+from autofactory.introspectors.django_ import DjangoIntrospector
+from autofactory.utils import compat
 
 
 class DjangoAutoOptions(DjangoOptions):
@@ -33,8 +34,7 @@ class DjangoAutoOptions(DjangoOptions):
         return introspecter.build_all(autofields)
 
     def get_fields_to_autodeclare(self):
-        # TODO: Make compatibility with previous Django versions.
-        all_fields = self.model._meta.get_fields()
+        all_fields = self._get_all_fields()
 
         if self.fields == "__all__":
             return all_fields
@@ -45,3 +45,6 @@ class DjangoAutoOptions(DjangoOptions):
         return super(DjangoAutoOptions, self)._build_default_options() + [
             OptionDefault("fields", tuple(), inherit=True),
         ]
+
+    def _get_all_fields(self):
+        return compat.django_.get_all_fields(self.model)

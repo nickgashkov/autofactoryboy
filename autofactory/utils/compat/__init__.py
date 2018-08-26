@@ -5,7 +5,6 @@
 # Distributed under MIT License. See LICENSE file for details.
 from __future__ import unicode_literals
 
+import autofactory.utils.compat.django_
 
-from autofactory.builders import django_
-
-__all__ = ("django_",)
+__all__ = tuple()
