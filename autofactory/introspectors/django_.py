@@ -36,7 +36,7 @@ class DjangoIntrospector(object):
         return self._get_generic_builder(field)
 
     def _get_concrete_builder(self, field):
-        if field.choices:
+        if getattr(field, 'choices', tuple()):
             return builders.django_.from_choices
 
         return None

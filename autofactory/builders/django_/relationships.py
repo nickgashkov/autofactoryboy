@@ -7,12 +7,12 @@ from __future__ import unicode_literals
 
 
 def build_foreignkey(field_cls):
-    return None
+    raise NotImplementedError('Relational fields are not supported yet.')
 
 
 def build_manytomanyfield(field_cls):
-    return []
+    raise NotImplementedError('Relational fields are not supported yet.')
 
 
 def build_onetoonefield(field_cls):
-    return None
+    raise NotImplementedError('Relational fields are not supported yet.')

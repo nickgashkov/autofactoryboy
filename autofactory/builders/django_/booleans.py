@@ -5,13 +5,12 @@
 # Distributed under MIT License. See LICENSE file for details.
 from __future__ import unicode_literals
 
-from factory import Faker
+import factory
 
 
 def build_booleanfield(field_cls):
-    return Faker('pybool')
+    return factory.Faker('pybool')
 
 
 def build_nullbooleanfield(field_cls):
-    # TODO: Implement ~ pybool or ``None``.
-    return Faker('pybool')
+    return factory.Faker('null_boolean')

@@ -20,16 +20,11 @@ def get_all_fields(model):
     if django_version >= (1, 8):
         return model._meta.get_fields()
 
-    def get_field(field_name):
-        field_data = model._meta.get_field_by_name(field_name)
-        field = field_data[0]
-
-        return field
-
-    all_field_names = model._meta.get_all_field_names()
-    all_fields = map(get_field, all_field_names)
-
-    return all_fields
+    return [
+        field for field, __ in model._meta.get_fields_with_model()
+    ] + [
+        field for field, __ in model._meta.get_m2m_with_model()
+    ]
 
 
 def get_generic_fields():

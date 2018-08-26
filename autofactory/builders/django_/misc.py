@@ -5,18 +5,20 @@
 # Distributed under MIT License. See LICENSE file for details.
 from __future__ import unicode_literals
 
+import factory
+
 
 def build_binaryfield(field_cls):
-    return b"binary-data"
+    return factory.Faker("binary")
 
 
 def build_filefield(field_cls):
-    return None
+    raise NotImplementedError("'FileField' is not implemented yet.")
 
 
 def build_filepathfield(field_cls):
-    return ""
+    return factory.Faker("file_path")
 
 
 def build_imagefield(field_cls):
-    return None
+    raise NotImplementedError("'ImageField' is not implemented yet.")
