@@ -9,7 +9,7 @@ import factory
 
 
 def build_binaryfield(field_cls):
-    return factory.Faker("binary")
+    return factory.Faker("binary", length=(1 * 1024))
 
 
 def build_filefield(field_cls):

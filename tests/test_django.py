@@ -16,7 +16,7 @@ from django import test
 from django.test.runner import DiscoverRunner
 from django.test import utils
 
-from tests.app.factories import ConcreteFactory
+from tests.app.factories import OneFactory
 
 
 test_state = dict()
@@ -42,4 +42,4 @@ def tearDownModule():
 
 class DjangoTestCase(test.TestCase):
     def test(self):
-        concrete = ConcreteFactory.create()
+        concrete = OneFactory.create()

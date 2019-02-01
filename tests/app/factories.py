@@ -1,8 +1,8 @@
 from autofactory import DjangoModelAutoFactory
-from tests.app.models import Concrete
+from tests.app.models import One
 
 
-class ConcreteFactory(DjangoModelAutoFactory):
+class OneFactory(DjangoModelAutoFactory):
     class Meta:
-        model = Concrete
+        model = One
         fields = "__all__"

@@ -37,7 +37,7 @@ class DjangoIntrospector(object):
 
     def _get_concrete_builder(self, field):
         if getattr(field, 'choices', tuple()):
-            return builders.django_.from_choices
+            return builders.from_choices
 
         return None
 
@@ -45,7 +45,7 @@ class DjangoIntrospector(object):
         field_cls = type(field)
 
         builder_name = "build_" + field_cls.__name__.lower()
-        builder = getattr(builders.django_, builder_name, None)
+        builder = getattr(builders, builder_name, None)
 
         if builder is None:
             raise TypeError("'{field_cls}' is not supported.".format(field_cls=field_cls.__name__))
