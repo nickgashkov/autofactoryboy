@@ -39,7 +39,7 @@ setup(
     keywords="autofactory",
     name="autofactory",
     packages=find_packages(include=["autofactory"]),
-    url="https://github.com/nickgashkov/autofactory",
+    url="https://github.com/nickgashkov/autofactoryboy",
     version="0.1.0",
     zip_safe=False,
 )
