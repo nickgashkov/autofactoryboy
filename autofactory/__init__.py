@@ -7,7 +7,7 @@ from __future__ import unicode_literals
 
 from autofactory.django.factory import DjangoModelAutoFactory
 
-__author__ = """Nick Gashkov"""
+__author__ = "Nick Gashkov"
 __email__ = "nick@gashkov.com"
 __version__ = "0.1.0"
 

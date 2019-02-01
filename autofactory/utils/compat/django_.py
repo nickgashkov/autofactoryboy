@@ -5,11 +5,6 @@
 # Distributed under MIT License. See LICENSE file for details.
 from __future__ import unicode_literals
 
-try:
-    import django
-except ImportError as e:
-    raise ImportError("Django is not installed.")
-
 import django.db.models
 
 
