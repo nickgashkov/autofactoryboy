@@ -5,11 +5,22 @@ AutoFactoryBoy generates factories for you.
 ## Usage
 
 ```python
-from autofactory.factories.django_ import DjangoModelAutoFactory
-from project.fruits.models import Fruit
+from autofactory import DjangoModelAutoFactory
 
-class FruitAutoFactory(DjangoModelAutoFactory):
+from tests.app.models import Concrete
+
+class ConcreteFactory(DjangoModelAutoFactory):
     class Meta:
-        model = Friut
+        model = Concrete
         fields = "__all__"
+
+concrete = ConcreteFactory.create()
+```
+
+## Testing
+
+To perform a testing against a current environment, run:
+
+```bash
+$ make test
 ```
