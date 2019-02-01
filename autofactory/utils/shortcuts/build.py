@@ -18,4 +18,4 @@ def build_django_autofactory(model_cls):
     factory_cls_name = "Generated" + model_cls.__name__ + "Factory"
     factory_cls_name = str(factory_cls_name)
 
-    return FactoryMetaClass(factory_cls_name, [DjangoModelAutoFactory], {'Meta': Meta})
+    return FactoryMetaClass(factory_cls_name, [DjangoModelAutoFactory], {"Meta": Meta})

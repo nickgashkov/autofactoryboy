@@ -9,16 +9,16 @@ import factory
 
 
 def build_datefield(field_cls):
-    return factory.Faker('date_this_decade')
+    return factory.Faker("date_this_decade")
 
 
 def build_datetimefield(field_cls):
-    return factory.Faker('date_time')
+    return factory.Faker("date_time")
 
 
 def build_durationfield(field_cls):
-    return factory.Faker('time_delta')
+    return factory.Faker("time_delta")
 
 
 def build_timefield(field_cls):
-    return factory.Faker('time_object')
+    return factory.Faker("time_object")

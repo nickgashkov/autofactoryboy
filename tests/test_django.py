@@ -9,7 +9,7 @@ import os
 
 import django
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tests.app.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tests.app.settings")
 django.setup()
 
 from django import test
@@ -28,13 +28,13 @@ def setUpModule():
     runner = DiscoverRunner()
     runner_state = runner.setup_databases()
 
-    test_state['runner'] = runner
-    test_state['runner_state'] = runner_state
+    test_state["runner"] = runner
+    test_state["runner_state"] = runner_state
 
 
 def tearDownModule():
-    runner = test_state['runner']
-    runner_state = test_state['runner_state']
+    runner = test_state["runner"]
+    runner_state = test_state["runner_state"]
 
     runner.teardown_databases(runner_state)
     utils.teardown_test_environment()

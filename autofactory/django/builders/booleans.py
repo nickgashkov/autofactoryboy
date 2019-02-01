@@ -9,8 +9,8 @@ import factory
 
 
 def build_booleanfield(field_cls):
-    return factory.Faker('pybool')
+    return factory.Faker("pybool")
 
 
 def build_nullbooleanfield(field_cls):
-    return factory.Faker('null_boolean')
+    return factory.Faker("null_boolean")

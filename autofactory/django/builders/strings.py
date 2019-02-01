@@ -9,28 +9,28 @@ import factory
 
 
 def build_charfield(field_cls):
-    return factory.Faker('sentence')
+    return factory.Faker("text", max_nb_chars=field_cls.max_length)
 
 
 def build_emailfield(field_cls):
-    return factory.Faker('email')
+    return factory.Faker("email")
 
 
 def build_genericipaddressfield(field_cls):
-    return factory.Faker('ipv4')
+    return factory.Faker("ipv4")
 
 
 def build_slugfield(field_cls):
-    return factory.Faker('slug')
+    return factory.Faker("slug")
 
 
 def build_textfield(field_cls):
-    return factory.Faker('text')
+    return factory.Faker("text")
 
 
 def build_urlfield(field_cls):
-    return factory.Faker('url')
+    return factory.Faker("url")
 
 
 def build_uuidfield(field_cls):
-    return factory.Faker('uuid4')
+    return factory.Faker("uuid4")
