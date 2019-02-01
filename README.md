@@ -1,20 +1,29 @@
 # AutoFactoryBoy
 
+*Warning!* Currently working only with 
+[Django](https://github.com/django/django).
+
 AutoFactoryBoy generates factories for you.
 
-## Usage
+It introspects Django's models and generates a factory with all fields with 
+`blank=False`.
+
+## Quickstart
+
+To use AutoFactoryBoy, simply declare an `AutoFactory` by subclassing a 
+`autofactory.DjangoModelAutoFactory`.
 
 ```python
 from autofactory import DjangoModelAutoFactory
 
-from tests.app.models import Concrete
+from tests.app.models import One
 
-class ConcreteFactory(DjangoModelAutoFactory):
+class OneFactory(DjangoModelAutoFactory):
     class Meta:
-        model = Concrete
+        model = One
         fields = "__all__"
 
-concrete = ConcreteFactory.create()
+one = OneFactory.create()
 ```
 
 ## Testing
@@ -23,4 +32,10 @@ To perform a testing against a current environment, run:
 
 ```bash
 $ make test
+```
+
+To test a package against a bunch of environments, use tox:
+
+```bash
+$ tox
 ```
