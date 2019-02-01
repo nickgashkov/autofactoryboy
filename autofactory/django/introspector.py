@@ -5,7 +5,7 @@
 # Distributed under MIT License. See LICENSE file for details.
 from __future__ import unicode_literals
 
-from autofactory import builders
+from autofactory.django import builders
 from autofactory.utils import compat
 
 

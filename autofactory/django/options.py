@@ -8,7 +8,7 @@ from __future__ import unicode_literals
 from factory.base import OptionDefault
 from factory.django import DjangoOptions
 
-from autofactory.introspectors.django_ import DjangoIntrospector
+from autofactory.django.introspector import DjangoIntrospector
 from autofactory.utils import compat
 
 

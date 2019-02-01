@@ -1,6 +1,6 @@
 from factory.base import FactoryMetaClass
 
-from autofactory.factories.django_ import DjangoModelAutoFactory
+from autofactory.django.factory import DjangoModelAutoFactory
 
 
 def build_django_autofactory(model_cls):
