@@ -5,14 +5,25 @@
 # Distributed under MIT License. See LICENSE file for details.
 from __future__ import unicode_literals
 
+import factory
+
+from autofactory.utils.compat.django_ import get_related_model
+from autofactory.utils.shortcuts.build import build_django_autofactory
+
 
 def build_foreignkey(field_cls):
-    raise NotImplementedError("Relational fields are not supported yet.")
+    model = get_related_model(field_cls)
+    model_factory = build_django_autofactory(model)
+
+    return factory.SubFactory(model_factory)
 
 
 def build_manytomanyfield(field_cls):
-    raise NotImplementedError("Relational fields are not supported yet.")
+    raise NotImplementedError("M2M fields are not supported yet.")
 
 
 def build_onetoonefield(field_cls):
-    raise NotImplementedError("Relational fields are not supported yet.")
+    model = get_related_model(field_cls)
+    model_factory = build_django_autofactory(model)
+
+    return factory.SubFactory(model_factory)

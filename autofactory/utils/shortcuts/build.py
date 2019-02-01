@@ -7,10 +7,10 @@ from __future__ import unicode_literals
 
 from factory.base import FactoryMetaClass
 
-from autofactory.django.factory import DjangoModelAutoFactory
-
 
 def build_django_autofactory(model_cls):
+    from autofactory.django.factory import DjangoModelAutoFactory
+
     class Meta:
         model = model_cls
         fields = "__all__"
@@ -18,4 +18,4 @@ def build_django_autofactory(model_cls):
     factory_cls_name = "Generated" + model_cls.__name__ + "Factory"
     factory_cls_name = str(factory_cls_name)
 
-    return FactoryMetaClass(factory_cls_name, [DjangoModelAutoFactory], {"Meta": Meta})
+    return FactoryMetaClass(factory_cls_name, (DjangoModelAutoFactory,), {"Meta": Meta})

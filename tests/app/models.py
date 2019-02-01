@@ -15,7 +15,7 @@ class One(models.Model):
     charfield = models.CharField(max_length=50)
     datefield = models.DateField()
     datetimefield = models.DateTimeField()
-    decimalfield = models.DecimalField()
+    decimalfield = models.DecimalField(max_digits=5, decimal_places=2)
     durationfield = models.DurationField()
     emailfield = models.EmailField()
     # filefield = models.FileField()
@@ -33,9 +33,9 @@ class One(models.Model):
     timefield = models.TimeField()
     urlfield = models.URLField()
     uuidfield = models.UUIDField()
-    # foreignkey = models.ForeignKey("Two", on_delete=models.CASCADE)
+    foreignkey = models.ForeignKey("Two", on_delete=models.CASCADE)
     # manytomany = models.ManyToManyField("Two")
-    # onetoone = models.OneToOneField("Two", on_delete=models.CASCADE)
+    onetoone = models.OneToOneField("Two", on_delete=models.CASCADE)
 
     class Meta:
         app_label = "app"
