@@ -8,4 +8,4 @@ __pycache__
 
 # ...and keep
 !.gitignore
-!.travis-ci
+!.travis.yml
