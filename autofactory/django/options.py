@@ -9,7 +9,7 @@ from factory.base import OptionDefault
 from factory.django import DjangoOptions
 
 from autofactory.django.introspector import DjangoIntrospector
-from autofactory.utils import compat
+from autofactory.django import compat
 
 
 class DjangoAutoOptions(DjangoOptions):
@@ -47,4 +47,4 @@ class DjangoAutoOptions(DjangoOptions):
         ]
 
     def _get_all_fields(self):
-        return compat.django_.get_all_fields(self.model)
+        return compat.get_all_fields(self.model)

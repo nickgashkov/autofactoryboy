@@ -7,8 +7,8 @@ from __future__ import unicode_literals
 
 import factory
 
-from autofactory.utils.compat.django_ import get_related_model
-from autofactory.utils.shortcuts.build import build_django_autofactory
+from autofactory.django.compat import get_related_model
+from autofactory.django.shortcuts import build_django_autofactory
 
 
 def build_foreignkey(field_cls):

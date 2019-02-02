@@ -6,7 +6,7 @@
 from __future__ import unicode_literals
 
 from autofactory.django import builders
-from autofactory.utils import compat
+from autofactory.django import compat
 
 
 class DjangoIntrospector(object):
@@ -53,4 +53,4 @@ class DjangoIntrospector(object):
         return builder
 
     def _is_concrete_field(self, field):
-        return field.__class__ not in compat.django_.get_generic_fields()
+        return field.__class__ not in compat.get_generic_fields()
