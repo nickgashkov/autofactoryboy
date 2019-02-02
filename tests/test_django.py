@@ -111,6 +111,7 @@ class EveryFieldTypeTestCase(test.TestCase):
         self.assertIsNotNone(every_field_not_blank.imagefield)
         self.assertIsNotNone(every_field_not_blank.integerfield)
         self.assertIsNotNone(every_field_not_blank.genericipaddressfield)
+        self.assertIsNotNone(every_field_not_blank.nullbooleanfield)
         self.assertIsNotNone(every_field_not_blank.positiveintegerfield)
         self.assertIsNotNone(every_field_not_blank.positivesmallintegerfield)
         self.assertIsNotNone(every_field_not_blank.slugfield)
@@ -121,10 +122,6 @@ class EveryFieldTypeTestCase(test.TestCase):
         self.assertIsNotNone(every_field_not_blank.uuidfield)
         self.assertIsNotNone(every_field_not_blank.foreignkey)
         self.assertIsNotNone(every_field_not_blank.onetoone)
-
-        # `NullBooleanField` will always be `None` in shortcut autofactory
-        # because it is always `blank`.
-        self.assertIsNone(every_field_not_blank.nullbooleanfield)
 
         self.assertTrue(every_field_not_blank.manytomany.exists())
 

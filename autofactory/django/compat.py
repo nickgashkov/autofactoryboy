@@ -39,3 +39,12 @@ def get_related_model(field_cls):
         return field_cls.remote_field.model
 
     return field_cls.rel.to
+
+
+def get_not_blank_fields(fields):
+    boolean_fields = {
+        django.db.models.BooleanField,
+        django.db.models.NullBooleanField,
+    }
+
+    return [f for f in fields if f.__class__ in boolean_fields or not f.blank]
