@@ -1,5 +1,7 @@
 # AutoFactoryBoy
 
+[![Build Status](https://travis-ci.org/nickgashkov/autofactoryboy.svg?branch=master)](https://travis-ci.org/nickgashkov/autofactoryboy)
+
 *Warning!* Currently working only with 
 [Django](https://github.com/django/django).
 
@@ -16,14 +18,14 @@ To use AutoFactoryBoy, simply declare an `AutoFactory` by subclassing a
 ```python
 from autofactory import DjangoModelAutoFactory
 
-from tests.app.models import One
+from models import Model
 
-class OneFactory(DjangoModelAutoFactory):
+class ModelFactory(DjangoModelAutoFactory):
     class Meta:
-        model = One
+        model = Model
         fields = "__all__"
 
-one = OneFactory.create()
+model = ModelFactory.create()
 ```
 
 ## Testing
