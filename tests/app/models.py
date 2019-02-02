@@ -8,7 +8,7 @@ from __future__ import unicode_literals
 from django.db import models
 
 
-class One(models.Model):
+class EveryFieldNotBlank(models.Model):
     bigintegerfield = models.BigIntegerField()
     binaryfield = models.BinaryField()
     booleanfield = models.BooleanField()
@@ -18,10 +18,10 @@ class One(models.Model):
     decimalfield = models.DecimalField(max_digits=5, decimal_places=2)
     durationfield = models.DurationField()
     emailfield = models.EmailField()
-    # filefield = models.FileField()
+    filefield = models.FileField(upload_to='files/')
     filepathfield = models.FilePathField()
     floatfield = models.FloatField()
-    # imagefield = models.ImageField()
+    imagefield = models.ImageField(upload_to='images/')
     integerfield = models.IntegerField()
     genericipaddressfield = models.GenericIPAddressField()
     nullbooleanfield = models.NullBooleanField()

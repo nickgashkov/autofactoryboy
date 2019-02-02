@@ -1,8 +1,8 @@
 from autofactory import DjangoModelAutoFactory
-from tests.app.models import One
+from tests.app.models import EveryFieldNotBlank
 
 
-class OneFactory(DjangoModelAutoFactory):
+class EveryFieldNotBlankFactory(DjangoModelAutoFactory):
     class Meta:
-        model = One
+        model = EveryFieldNotBlank
         fields = "__all__"

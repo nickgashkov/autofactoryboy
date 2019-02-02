@@ -13,4 +13,4 @@ def build_booleanfield(field_cls):
 
 
 def build_nullbooleanfield(field_cls):
-    return factory.Faker("null_boolean")
+    return factory.Faker("pybool")

@@ -13,7 +13,7 @@ def build_binaryfield(field_cls):
 
 
 def build_filefield(field_cls):
-    raise NotImplementedError("'FileField' is not implemented yet.")
+    return factory.django.FileField()
 
 
 def build_filepathfield(field_cls):
@@ -21,4 +21,4 @@ def build_filepathfield(field_cls):
 
 
 def build_imagefield(field_cls):
-    raise NotImplementedError("'ImageField' is not implemented yet.")
+    return factory.django.ImageField()
