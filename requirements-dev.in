@@ -1,0 +1,6 @@
+autoflake
+django
+factory-boy
+isort
+Pillow
+tox-travis

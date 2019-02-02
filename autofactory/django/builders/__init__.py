@@ -5,7 +5,10 @@
 # Distributed under MIT License. See LICENSE file for details.
 from __future__ import unicode_literals
 
-from autofactory.django.builders.booleans import build_booleanfield, build_nullbooleanfield
+from autofactory.django.builders.booleans import (
+    build_booleanfield,
+    build_nullbooleanfield,
+)
 from autofactory.django.builders.concrete import from_choices
 from autofactory.django.builders.datetimes import (
     build_datefield,
@@ -13,7 +16,12 @@ from autofactory.django.builders.datetimes import (
     build_durationfield,
     build_timefield,
 )
-from autofactory.django.builders.misc import build_binaryfield, build_filefield, build_filepathfield, build_imagefield
+from autofactory.django.builders.misc import (
+    build_binaryfield,
+    build_filefield,
+    build_filepathfield,
+    build_imagefield,
+)
 from autofactory.django.builders.numbers import (
     build_bigintegerfield,
     build_decimalfield,
@@ -23,7 +31,11 @@ from autofactory.django.builders.numbers import (
     build_positivesmallintegerfield,
     build_smallintegerfield,
 )
-from autofactory.django.builders.relationships import build_foreignkey, build_manytomanyfield, build_onetoonefield
+from autofactory.django.builders.relationships import (
+    build_foreignkey,
+    build_manytomanyfield,
+    build_onetoonefield,
+)
 from autofactory.django.builders.strings import (
     build_charfield,
     build_emailfield,

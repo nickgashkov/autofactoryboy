@@ -8,4 +8,5 @@ __pycache__
 
 # ...and keep
 !.gitignore
+!.isort.cfg
 !.travis.yml

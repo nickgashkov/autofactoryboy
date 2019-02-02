@@ -8,8 +8,8 @@ from __future__ import unicode_literals
 from factory.base import OptionDefault
 from factory.django import DjangoOptions
 
-from autofactory.django.introspector import DjangoIntrospector
 from autofactory.django import compat
+from autofactory.django.introspector import DjangoIntrospector
 
 
 class DjangoAutoOptions(DjangoOptions):
@@ -18,7 +18,7 @@ class DjangoAutoOptions(DjangoOptions):
     @property
     def declarations(self):
         declarations = super(DjangoAutoOptions, self).declarations
-        declarations.update(self.get_autodeclarations(declarations=declarations))
+        declarations.update(self.get_autodeclarations(declarations))
 
         return declarations
 

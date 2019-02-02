@@ -5,8 +5,7 @@
 # Distributed under MIT License. See LICENSE file for details.
 from __future__ import unicode_literals
 
-from autofactory.django import builders
-from autofactory.django import compat
+from autofactory.django import builders, compat
 
 
 class DjangoIntrospector(object):
@@ -48,7 +47,11 @@ class DjangoIntrospector(object):
         builder = getattr(builders, builder_name, None)
 
         if builder is None:
-            raise TypeError("'{field_cls}' is not supported.".format(field_cls=field_cls.__name__))
+            raise TypeError(
+                "'{field_cls}' is not supported.".format(
+                    field_cls=field_cls.__name__,
+                )
+            )
 
         return builder
 

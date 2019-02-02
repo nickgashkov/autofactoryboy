@@ -7,7 +7,6 @@ from __future__ import unicode_literals
 
 import factory
 
-
 # `factory.Faker("pyint")` is a random integer ranges from 0 to 9999, so it
 # will be good enough for every integer-related field.
 

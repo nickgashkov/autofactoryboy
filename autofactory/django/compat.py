@@ -7,7 +7,6 @@ from __future__ import unicode_literals
 
 import django.db.models
 
-
 django_version = django.VERSION[:2]
 
 
