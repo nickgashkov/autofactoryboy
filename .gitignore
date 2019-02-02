@@ -1,10 +1,11 @@
-# System files.
+# Ignore...
 .*
 *~
 
-# Python cache.
 __pycache__
 *.pyc
 
-# Keep this gitignore.
+
+# ...and keep
 !.gitignore
+!.travis-ci
