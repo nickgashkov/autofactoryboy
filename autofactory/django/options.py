@@ -37,7 +37,7 @@ class DjangoAutoOptions(DjangoOptions):
         all_fields = self._get_all_fields()
 
         if self.fields == "__all__":
-            return all_fields
+            return filter(lambda x: not x.blank, all_fields)
 
         return filter(lambda x: x.name in self.fields, all_fields)
 

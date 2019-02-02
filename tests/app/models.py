@@ -8,7 +8,7 @@ from __future__ import unicode_literals
 from django.db import models
 
 
-class EveryFieldNotBlank(models.Model):
+class EveryFieldType(models.Model):
     bigintegerfield = models.BigIntegerField()
     binaryfield = models.BinaryField()
     booleanfield = models.BooleanField()
@@ -33,14 +33,25 @@ class EveryFieldNotBlank(models.Model):
     timefield = models.TimeField()
     urlfield = models.URLField()
     uuidfield = models.UUIDField()
-    foreignkey = models.ForeignKey("Two", on_delete=models.CASCADE)
-    manytomany = models.ManyToManyField("Two")
-    onetoone = models.OneToOneField("Two", on_delete=models.CASCADE)
+    foreignkey = models.ForeignKey("WithDeclaredField", on_delete=models.CASCADE)
+    manytomany = models.ManyToManyField("WithDeclaredField")
+    onetoone = models.OneToOneField("WithBlankField", on_delete=models.CASCADE)
 
     class Meta:
         app_label = "app"
 
 
-class Two(models.Model):
+class WithDeclaredField(models.Model):
+    declared_integer = models.IntegerField()
+    autodeclared_integer = models.IntegerField()
+
+    class Meta:
+        app_label = "app"
+
+
+class WithBlankField(models.Model):
+    can_be_blank = models.IntegerField(blank=True, null=True)
+    cannot_be_blank = models.IntegerField()
+
     class Meta:
         app_label = "app"

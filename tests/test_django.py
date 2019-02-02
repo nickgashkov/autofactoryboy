@@ -20,9 +20,13 @@ from django.conf import settings
 from django.test.runner import DiscoverRunner
 from django.test import utils
 
-from tests.app.factories import EveryFieldNotBlankFactory
-from tests.app.models import EveryFieldNotBlank
-
+from tests.app.factories import (
+    EveryFieldTypeFactory,
+    WithDeclaredFieldFactory,
+    WithBlankFieldAndAllFieldsFactory,
+    WithBlankFieldAndNotAllFieldsFactory,
+)
+from tests.app.models import EveryFieldType
 
 test_state = dict()
 
@@ -49,9 +53,15 @@ def tearDownModule():
     shutil.rmtree(settings.MEDIA_ROOT, ignore_errors=True)
 
 
-class EveryFieldNotBlankTestCase(test.TestCase):
-    def test_regular_factory_build_every_field(self):
-        every_field_not_blank = EveryFieldNotBlankFactory.create()
+class EveryFieldTypeTestCase(test.TestCase):
+    def test_autofactory_can_create_and_build(self):
+        EveryFieldTypeFactory.create()
+        EveryFieldTypeFactory.build()
+        EveryFieldTypeFactory.create_batch(2)
+        EveryFieldTypeFactory.build_batch(2)
+
+    def test_regular_autofactory_builds_every_field(self):
+        every_field_not_blank = EveryFieldTypeFactory.create()
 
         self.assertIsNotNone(every_field_not_blank.bigintegerfield)
         self.assertIsNotNone(every_field_not_blank.binaryfield)
@@ -78,11 +88,12 @@ class EveryFieldNotBlankTestCase(test.TestCase):
         self.assertIsNotNone(every_field_not_blank.urlfield)
         self.assertIsNotNone(every_field_not_blank.uuidfield)
         self.assertIsNotNone(every_field_not_blank.foreignkey)
-        self.assertTrue(every_field_not_blank.manytomany.exists())
         self.assertIsNotNone(every_field_not_blank.onetoone)
 
-    def test_shortcut_factory_build_every_field(self):
-        every_field_not_blank_factory = autofactory(EveryFieldNotBlank)
+        self.assertTrue(every_field_not_blank.manytomany.exists())
+
+    def test_shortcut_autofactory_builds_every_field_except_blank_one(self):
+        every_field_not_blank_factory = autofactory(EveryFieldType)
         every_field_not_blank = every_field_not_blank_factory.create()
 
         self.assertIsNotNone(every_field_not_blank.bigintegerfield)
@@ -100,7 +111,6 @@ class EveryFieldNotBlankTestCase(test.TestCase):
         self.assertIsNotNone(every_field_not_blank.imagefield)
         self.assertIsNotNone(every_field_not_blank.integerfield)
         self.assertIsNotNone(every_field_not_blank.genericipaddressfield)
-        self.assertIsNotNone(every_field_not_blank.nullbooleanfield)
         self.assertIsNotNone(every_field_not_blank.positiveintegerfield)
         self.assertIsNotNone(every_field_not_blank.positivesmallintegerfield)
         self.assertIsNotNone(every_field_not_blank.slugfield)
@@ -110,5 +120,28 @@ class EveryFieldNotBlankTestCase(test.TestCase):
         self.assertIsNotNone(every_field_not_blank.urlfield)
         self.assertIsNotNone(every_field_not_blank.uuidfield)
         self.assertIsNotNone(every_field_not_blank.foreignkey)
-        self.assertTrue(every_field_not_blank.manytomany.exists())
         self.assertIsNotNone(every_field_not_blank.onetoone)
+
+        # `NullBooleanField` will always be `None` in shortcut autofactory
+        # because it is always `blank`.
+        self.assertIsNone(every_field_not_blank.nullbooleanfield)
+
+        self.assertTrue(every_field_not_blank.manytomany.exists())
+
+    def test_autofactory_does_not_override_declared_field(self):
+        with_declared_field = WithDeclaredFieldFactory.create()
+
+        self.assertIsNotNone(with_declared_field.autodeclared_integer)
+        self.assertEqual(with_declared_field.declared_integer, -42)
+
+    def test_autofactory_does_not_fill_blank_field_if_fields_is___all__(self):
+        with_blank_field = WithBlankFieldAndAllFieldsFactory.create()
+
+        self.assertIsNone(with_blank_field.can_be_blank)
+        self.assertIsNotNone(with_blank_field.cannot_be_blank)
+
+    def test_autofactory_does_fill_blank_field_if_it_is_specified_in_fields(self):
+        with_blank_field = WithBlankFieldAndNotAllFieldsFactory.create()
+
+        self.assertIsNotNone(with_blank_field.can_be_blank)
+        self.assertIsNotNone(with_blank_field.cannot_be_blank)
