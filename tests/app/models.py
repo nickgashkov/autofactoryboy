@@ -34,7 +34,7 @@ class EveryFieldNotBlank(models.Model):
     urlfield = models.URLField()
     uuidfield = models.UUIDField()
     foreignkey = models.ForeignKey("Two", on_delete=models.CASCADE)
-    # manytomany = models.ManyToManyField("Two")
+    manytomany = models.ManyToManyField("Two")
     onetoone = models.OneToOneField("Two", on_delete=models.CASCADE)
 
     class Meta:

@@ -75,5 +75,5 @@ class EveryFieldNotBlankTestCase(test.TestCase):
         self.assertIsNotNone(every_field_not_blank.urlfield)
         self.assertIsNotNone(every_field_not_blank.uuidfield)
         self.assertIsNotNone(every_field_not_blank.foreignkey)
-        # self.assertIsNotNone(every_field_not_blank.manytomany)
+        self.assertTrue(every_field_not_blank.manytomany.exists())
         self.assertIsNotNone(every_field_not_blank.onetoone)
