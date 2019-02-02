@@ -10,6 +10,8 @@ import shutil
 
 import django
 
+from autofactory import autofactory
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tests.app.settings")
 django.setup()
 
@@ -19,6 +21,7 @@ from django.test.runner import DiscoverRunner
 from django.test import utils
 
 from tests.app.factories import EveryFieldNotBlankFactory
+from tests.app.models import EveryFieldNotBlank
 
 
 test_state = dict()
@@ -47,8 +50,40 @@ def tearDownModule():
 
 
 class EveryFieldNotBlankTestCase(test.TestCase):
-    def test_builders_build(self):
+    def test_regular_factory_build_every_field(self):
         every_field_not_blank = EveryFieldNotBlankFactory.create()
+
+        self.assertIsNotNone(every_field_not_blank.bigintegerfield)
+        self.assertIsNotNone(every_field_not_blank.binaryfield)
+        self.assertIsNotNone(every_field_not_blank.booleanfield)
+        self.assertIsNotNone(every_field_not_blank.charfield)
+        self.assertIsNotNone(every_field_not_blank.datefield)
+        self.assertIsNotNone(every_field_not_blank.datetimefield)
+        self.assertIsNotNone(every_field_not_blank.decimalfield)
+        self.assertIsNotNone(every_field_not_blank.durationfield)
+        self.assertIsNotNone(every_field_not_blank.emailfield)
+        self.assertIsNotNone(every_field_not_blank.filefield)
+        self.assertIsNotNone(every_field_not_blank.filepathfield)
+        self.assertIsNotNone(every_field_not_blank.floatfield)
+        self.assertIsNotNone(every_field_not_blank.imagefield)
+        self.assertIsNotNone(every_field_not_blank.integerfield)
+        self.assertIsNotNone(every_field_not_blank.genericipaddressfield)
+        self.assertIsNotNone(every_field_not_blank.nullbooleanfield)
+        self.assertIsNotNone(every_field_not_blank.positiveintegerfield)
+        self.assertIsNotNone(every_field_not_blank.positivesmallintegerfield)
+        self.assertIsNotNone(every_field_not_blank.slugfield)
+        self.assertIsNotNone(every_field_not_blank.smallintegerfield)
+        self.assertIsNotNone(every_field_not_blank.textfield)
+        self.assertIsNotNone(every_field_not_blank.timefield)
+        self.assertIsNotNone(every_field_not_blank.urlfield)
+        self.assertIsNotNone(every_field_not_blank.uuidfield)
+        self.assertIsNotNone(every_field_not_blank.foreignkey)
+        self.assertTrue(every_field_not_blank.manytomany.exists())
+        self.assertIsNotNone(every_field_not_blank.onetoone)
+
+    def test_shortcut_factory_build_every_field(self):
+        every_field_not_blank_factory = autofactory(EveryFieldNotBlank)
+        every_field_not_blank = every_field_not_blank_factory.create()
 
         self.assertIsNotNone(every_field_not_blank.bigintegerfield)
         self.assertIsNotNone(every_field_not_blank.binaryfield)

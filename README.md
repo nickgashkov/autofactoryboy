@@ -13,7 +13,7 @@ It introspects Django's models and generates a factory with all fields with
 ## Quickstart
 
 To use AutoFactoryBoy, simply declare an `AutoFactory` by subclassing a 
-`autofactory.DjangoModelAutoFactory`.
+`autofactory.DjangoModelAutoFactory`...
 
 ```python
 from autofactory import DjangoModelAutoFactory
@@ -26,6 +26,17 @@ class ModelFactory(DjangoModelAutoFactory):
         fields = "__all__"
 
 model = ModelFactory.create()
+```
+
+...or make one right from the model:
+
+```python
+from autofactory import autofactory
+
+from models import Model
+
+model_factory = autofactory(Model)
+model = model_factory.create()
 ```
 
 ## Testing
