@@ -56,7 +56,7 @@ setup(
     include_package_data=True,
     keywords="autofactory",
     name="autofactory",
-    packages=find_packages(["autofactory", "autofactory.*"]),
+    packages=find_packages(exclude=["tests", "tests.*"]),
     url="https://github.com/nickgashkov/autofactoryboy",
     version=get_version(),
     zip_safe=False,
