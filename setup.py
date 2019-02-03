@@ -10,7 +10,7 @@ from setuptools import setup, find_packages
 
 
 def get_version():
-    return __import__("autofactory").__version__
+    return __import__("__version__").__version__
 
 
 with open("README.md") as readme_file:
