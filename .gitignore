@@ -11,5 +11,6 @@ dist
 
 # ...and keep
 !.gitignore
+!.bumpversion.cfg
 !.isort.cfg
 !.travis.yml
