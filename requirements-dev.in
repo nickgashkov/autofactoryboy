@@ -1,4 +1,5 @@
 autoflake
+bumpversion
 django
 factory-boy
 isort
