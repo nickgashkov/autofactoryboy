@@ -1,12 +1,28 @@
 # AutoFactoryBoy
 
 [![Build Status](https://travis-ci.org/nickgashkov/autofactoryboy.svg?branch=master)](https://travis-ci.org/nickgashkov/autofactoryboy)
+[![PyPI Package](https://img.shields.io/pypi/v/autofactory.svg)](https://pypi.org/project/autofactory/)
 
 > **Warning!** Current version of *AutoFactoryBoy* supports only 
 [Django](https://github.com/django/django) backend.
 
 *AutoFactoryBoy* introspects Django's models and generates a factory with all 
 not blank fields.
+
+## Installation
+
+Install from PyPI:
+
+```bash
+$ pip install autofactory
+```
+
+Build from source:
+
+```bash
+$ git clone git://github.com/nickgashkov/autofactoryboy/
+$ python setup.py install
+```
 
 ## Quickstart
 
