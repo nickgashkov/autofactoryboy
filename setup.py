@@ -6,11 +6,17 @@
 # Distributed under MIT License. See LICENSE file for details.
 from __future__ import unicode_literals
 
+import os
+import re
+
 from setuptools import setup, find_packages
 
 
 def get_version():
-    return __import__("__version__").__version__
+    py = open(os.path.join("autofactory", "__init__.py")).read()
+    py_version = re.search("__version__ = ['\"]([^'\"]+)['\"]", py).group(1)
+
+    return py_version
 
 
 with open("README.md") as readme_file:
