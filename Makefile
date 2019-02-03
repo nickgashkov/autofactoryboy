@@ -15,6 +15,8 @@ upgrade:
 test:
 	python -m unittest
 
+test-tox:
+	tox
 
 _sort:
 	autoflake -r -i --remove-all-unused-imports $(CODEDIR)/
