@@ -8,7 +8,7 @@ from __future__ import unicode_literals
 from factory.base import FactoryMetaClass
 
 
-def build_django_autofactory(model_cls):
+def build_django_autofactory(model_cls, **kwargs):
     from autofactory.django.factory import DjangoModelAutoFactory
 
     class Meta:
@@ -18,8 +18,11 @@ def build_django_autofactory(model_cls):
     factory_cls_name = "Generated" + model_cls.__name__ + "Factory"
     factory_cls_name = str(factory_cls_name)
 
+    factory_attrs = kwargs.copy()
+    factory_attrs["Meta"] = Meta
+
     return FactoryMetaClass(
         factory_cls_name,
         (DjangoModelAutoFactory,),
-        {"Meta": Meta},
+        factory_attrs,
     )

@@ -55,3 +55,17 @@ class WithBlankField(models.Model):
 
     class Meta:
         app_label = "app"
+
+
+class WithCustomThrough(models.Model):
+    custom_through_m2m = models.ManyToManyField("WithBlankField", through="CustomThrough")
+
+    class Meta:
+        app_label = "app"
+
+
+class CustomThrough(models.Model):
+    with_custom_through = models.ForeignKey("WithCustomThrough", on_delete=models.CASCADE)
+    with_blank_field = models.ForeignKey("WithBlankField", on_delete=models.CASCADE)
+
+    non_blank_field = models.CharField(max_length=100)

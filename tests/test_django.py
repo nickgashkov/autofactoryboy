@@ -25,8 +25,8 @@ from tests.app.factories import (
     WithDeclaredFieldFactory,
     WithBlankFieldAndAllFieldsFactory,
     WithBlankFieldAndNotAllFieldsFactory,
-)
-from tests.app.models import EveryFieldType
+    WithCustomThroughFactory)
+from tests.app.models import EveryFieldType, CustomThrough
 
 test_state = dict()
 
@@ -142,3 +142,13 @@ class EveryFieldTypeTestCase(test.TestCase):
 
         self.assertIsNotNone(with_blank_field.can_be_blank)
         self.assertIsNotNone(with_blank_field.cannot_be_blank)
+
+    def test_autofactory_does_creates_m2m_with_a_custom_through(self):
+        with_custom_through = WithCustomThroughFactory.create()
+
+        self.assertTrue(with_custom_through.custom_through_m2m.exists())
+
+        through_qs = CustomThrough.objects.filter(with_custom_through=with_custom_through)
+        through_list = list(through_qs.values_list('non_blank_field', flat=True))
+
+        self.assertTrue(bool(through_list))

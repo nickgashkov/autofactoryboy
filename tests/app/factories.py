@@ -1,5 +1,5 @@
 from autofactory import DjangoModelAutoFactory
-from tests.app.models import EveryFieldType, WithDeclaredField, WithBlankField
+from tests.app.models import EveryFieldType, WithDeclaredField, WithBlankField, WithCustomThrough
 
 
 class EveryFieldTypeFactory(DjangoModelAutoFactory):
@@ -60,3 +60,9 @@ class WithBlankFieldAndNotAllFieldsFactory(DjangoModelAutoFactory):
     class Meta:
         model = WithBlankField
         fields = ("can_be_blank", "cannot_be_blank")
+
+
+class WithCustomThroughFactory(DjangoModelAutoFactory):
+    class Meta:
+        model = WithCustomThrough
+        fields = ("custom_through_m2m",)

@@ -19,6 +19,12 @@ def build_foreignkey(field_cls):
 
 
 def build_manytomanyfield(field_cls):
+    field_descriptor = getattr(field_cls.model, field_cls.name)
+    field_through = field_descriptor.through
+
+    if not field_through._meta.auto_created:
+        return build_manytomanyfield_with_a_through(field_cls)
+
     model_factory = build_django_autofactory(get_related_model(field_cls))
 
     def builder(obj, create, _extracted, **_kwargs):
@@ -29,6 +35,15 @@ def build_manytomanyfield(field_cls):
         manager.add(*model_factory.create_batch(2))
 
     return factory.PostGeneration(builder)
+
+
+def build_manytomanyfield_with_a_through(field_cls):
+    field_descriptor = getattr(field_cls.model, field_cls.name)
+    field_through = field_descriptor.through
+
+    field_through_factory = build_django_autofactory(field_through, **{field_cls.m2m_field_name(): None})
+
+    return factory.RelatedFactory(field_through_factory, field_cls.m2m_field_name())
 
 
 def build_onetoonefield(field_cls):

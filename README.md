@@ -102,6 +102,6 @@ $ make test-tox  # All tox environments
 ```
 ## TODO
 
-- [ ] Add support for `ManyToManyField` with a custom `through` model;
+- [x] Add support for `ManyToManyField` with a custom `through` model;
 - [ ] Do not generate automatically declaration for fields with defaults.
 - [ ] Add some kind of registry to allow extending builders.
