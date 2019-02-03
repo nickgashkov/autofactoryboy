@@ -1,5 +1,5 @@
 from autofactory import DjangoModelAutoFactory
-from tests.app.models import EveryFieldType, WithDeclaredField, WithBlankField, WithCustomThrough
+from tests.app.models import EveryFieldType, WithDeclaredField, WithBlankField, WithCustomThrough, WithDefault
 
 
 class EveryFieldTypeFactory(DjangoModelAutoFactory):
@@ -66,3 +66,15 @@ class WithCustomThroughFactory(DjangoModelAutoFactory):
     class Meta:
         model = WithCustomThrough
         fields = ("custom_through_m2m",)
+
+
+class WithDefaultAllFieldsFactory(DjangoModelAutoFactory):
+    class Meta:
+        model = WithDefault
+        fields = "__all__"
+
+
+class WithDefaultTupleFieldsFactory(DjangoModelAutoFactory):
+    class Meta:
+        model = WithDefault
+        fields = ("string", "string_with_default")

@@ -25,7 +25,10 @@ from tests.app.factories import (
     WithDeclaredFieldFactory,
     WithBlankFieldAndAllFieldsFactory,
     WithBlankFieldAndNotAllFieldsFactory,
-    WithCustomThroughFactory)
+    WithCustomThroughFactory,
+    WithDefaultAllFieldsFactory,
+    WithDefaultTupleFieldsFactory,
+)
 from tests.app.models import EveryFieldType, CustomThrough
 
 test_state = dict()
@@ -53,7 +56,7 @@ def tearDownModule():
     shutil.rmtree(settings.MEDIA_ROOT, ignore_errors=True)
 
 
-class EveryFieldTypeTestCase(test.TestCase):
+class DjangoTestCase(test.TestCase):
     def test_autofactory_can_create_and_build(self):
         EveryFieldTypeFactory.create()
         EveryFieldTypeFactory.build()
@@ -149,6 +152,19 @@ class EveryFieldTypeTestCase(test.TestCase):
         self.assertTrue(with_custom_through.custom_through_m2m.exists())
 
         through_qs = CustomThrough.objects.filter(with_custom_through=with_custom_through)
-        through_list = list(through_qs.values_list('non_blank_field', flat=True))
+        through_list = [t.non_blank_field for t in through_qs.all()]
 
-        self.assertTrue(bool(through_list))
+        self.assertNotIn(None, through_list)
+        self.assertNotIn("", through_list)
+
+    def test_autofactory_does_not_create_declaration_for_field_with_a_default_all_fields(self):
+        with_default_all_fields = WithDefaultAllFieldsFactory.create()
+
+        self.assertIsNotNone(with_default_all_fields.string)
+        self.assertEqual(with_default_all_fields.string_with_default, "DEFAULT")
+
+    def test_autofactory_does_not_create_declaration_for_field_with_a_default_tuple_fields(self):
+        with_default_tuple_fields = WithDefaultTupleFieldsFactory.create()
+
+        self.assertIsNotNone(with_default_tuple_fields.string)
+        self.assertEqual(with_default_tuple_fields.string_with_default, "DEFAULT")

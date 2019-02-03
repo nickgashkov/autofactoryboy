@@ -13,3 +13,7 @@ def from_choices(field_cls):
     random_choice = random_choice_tuple[0]
 
     return random_choice
+
+
+def from_default(field_cls):
+    return field_cls.default

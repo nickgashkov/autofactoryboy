@@ -9,7 +9,7 @@ from autofactory.django.builders.booleans import (
     build_booleanfield,
     build_nullbooleanfield,
 )
-from autofactory.django.builders.concrete import from_choices
+from autofactory.django.builders.concrete import from_choices, from_default
 from autofactory.django.builders.datetimes import (
     build_datefield,
     build_datetimefield,
@@ -75,4 +75,5 @@ __all__ = (
     "build_manytomanyfield",
     "build_onetoonefield",
     "from_choices",
+    "from_default",
 )

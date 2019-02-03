@@ -100,8 +100,3 @@ To test, run:
 $ make test      # Current environment
 $ make test-tox  # All tox environments
 ```
-## TODO
-
-- [x] Add support for `ManyToManyField` with a custom `through` model;
-- [ ] Do not generate automatically declaration for fields with defaults.
-- [ ] Add some kind of registry to allow extending builders.

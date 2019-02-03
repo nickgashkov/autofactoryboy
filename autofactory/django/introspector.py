@@ -38,6 +38,9 @@ class DjangoIntrospector(object):
         if getattr(field, "choices", tuple()):
             return builders.from_choices
 
+        if field.has_default():
+            return builders.from_default
+
         return None
 
     def _get_generic_builder(self, field):

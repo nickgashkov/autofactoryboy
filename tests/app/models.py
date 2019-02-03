@@ -69,3 +69,14 @@ class CustomThrough(models.Model):
     with_blank_field = models.ForeignKey("WithBlankField", on_delete=models.CASCADE)
 
     non_blank_field = models.CharField(max_length=100)
+
+    class Meta:
+        app_label = "app"
+
+
+class WithDefault(models.Model):
+    string = models.TextField()
+    string_with_default = models.TextField(default="DEFAULT")
+
+    class Meta:
+        app_label = "app"
