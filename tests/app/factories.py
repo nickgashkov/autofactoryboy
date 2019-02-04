@@ -1,4 +1,4 @@
-from autofactory import DjangoModelAutoFactory
+from autofactory.django import DjangoModelAutoFactory
 from tests.app.models import EveryFieldType, WithDeclaredField, WithBlankField, WithCustomThrough, WithDefault
 
 

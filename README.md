@@ -31,7 +31,7 @@ There are a couple of options to create an `AutoFactory` for a model:
 1. Subclass a `DjangoModelAutoFactory`:
 
     ```python
-    from autofactory import DjangoModelAutoFactory
+    from autofactory.django import DjangoModelAutoFactory
     
     from models import Model
     
@@ -47,7 +47,7 @@ There are a couple of options to create an `AutoFactory` for a model:
 shortcut:
 
     ```python
-    from autofactory import autofactory
+    from autofactory.django import autofactory
     
     from models import Model
     

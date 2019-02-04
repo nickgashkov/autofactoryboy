@@ -10,8 +10,6 @@ import shutil
 
 import django
 
-from autofactory import autofactory
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tests.app.settings")
 django.setup()
 
@@ -19,6 +17,8 @@ from django import test
 from django.conf import settings
 from django.test.runner import DiscoverRunner
 from django.test import utils
+
+from autofactory.django import autofactory
 
 from tests.app.factories import (
     EveryFieldTypeFactory,

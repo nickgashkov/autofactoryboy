@@ -8,12 +8,12 @@ from __future__ import unicode_literals
 import factory
 
 from autofactory.django.compat import get_related_model
-from autofactory.django.shortcuts import build_django_autofactory
+from autofactory.django.maker import make_django_autofactory
 
 
 def build_foreignkey(field_cls):
     model = get_related_model(field_cls)
-    model_factory = build_django_autofactory(model)
+    model_factory = make_django_autofactory(model)
 
     return factory.SubFactory(model_factory)
 
@@ -25,7 +25,7 @@ def build_manytomanyfield(field_cls):
     if not field_through._meta.auto_created:
         return build_manytomanyfield_with_a_through(field_cls)
 
-    model_factory = build_django_autofactory(get_related_model(field_cls))
+    model_factory = make_django_autofactory(get_related_model(field_cls))
 
     def builder(obj, create, _extracted, **_kwargs):
         if not create:
@@ -41,13 +41,13 @@ def build_manytomanyfield_with_a_through(field_cls):
     field_descriptor = getattr(field_cls.model, field_cls.name)
     field_through = field_descriptor.through
 
-    field_through_factory = build_django_autofactory(field_through, **{field_cls.m2m_field_name(): None})
+    field_through_factory = make_django_autofactory(field_through, **{field_cls.m2m_field_name(): None})
 
     return factory.RelatedFactory(field_through_factory, field_cls.m2m_field_name())
 
 
 def build_onetoonefield(field_cls):
     model = get_related_model(field_cls)
-    model_factory = build_django_autofactory(model)
+    model_factory = make_django_autofactory(model)
 
     return factory.SubFactory(model_factory)
