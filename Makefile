@@ -13,7 +13,7 @@ upgrade:
 	pip-sync $(SRCDIR)/requirements-dev.out
 
 test:
-	python -m unittest
+	python -m unittest discover
 
 test-tox:
 	tox
