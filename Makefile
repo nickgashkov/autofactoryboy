@@ -18,6 +18,9 @@ test:
 test-tox:
 	tox
 
+release:
+	python $(SRCDIR)/setup.py sdist && twine upload -r pypi $(SRCDIR)/dist/*
+
 _sort:
 	autoflake -r -i --remove-all-unused-imports $(CODEDIR)/
 	isort -rc $(CODEDIR)/
