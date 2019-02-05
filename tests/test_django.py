@@ -43,7 +43,10 @@ def setUpModule():
     test_state["runner"] = runner
     test_state["runner_state"] = runner_state
 
-    os.makedirs(settings.MEDIA_ROOT, exist_ok=True)
+    if os.path.exists(settings.MEDIA_ROOT):
+        return
+
+    os.makedirs(settings.MEDIA_ROOT)
 
 
 def tearDownModule():

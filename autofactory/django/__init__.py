@@ -14,7 +14,7 @@ except ImportError as e:
     )
 
 from autofactory.django.shortcuts import autofactory
-from autofactory.django.factory import DjangoModelAutoFactory
+from autofactory.django.factories import DjangoModelAutoFactory
 
 __all__ = (
     "autofactory",

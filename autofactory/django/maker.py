@@ -9,7 +9,7 @@ from factory.base import FactoryMetaClass
 
 
 def make_django_autofactory(model_cls, **kwargs):
-    from autofactory.django.factory import DjangoModelAutoFactory
+    from autofactory.django.factories import DjangoModelAutoFactory
 
     class Meta:
         model = model_cls
