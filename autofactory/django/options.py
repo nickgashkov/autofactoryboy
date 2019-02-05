@@ -19,6 +19,9 @@ class DjangoAutoOptions(DjangoOptions):
 
     @property
     def declarations(self):
+        if self.abstract:
+            return super(DjangoAutoOptions, self).declarations
+
         declarations = super(DjangoAutoOptions, self).declarations
         declarations.update(self.get_autodeclarations(declarations))
 

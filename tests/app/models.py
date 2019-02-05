@@ -8,6 +8,10 @@ from __future__ import unicode_literals
 from django.db import models
 
 
+class CustomCharField(models.CharField):
+    pass
+
+
 class EveryFieldType(models.Model):
     bigintegerfield = models.BigIntegerField()
     binaryfield = models.BinaryField()
@@ -77,6 +81,13 @@ class CustomThrough(models.Model):
 class WithDefault(models.Model):
     string = models.TextField()
     string_with_default = models.TextField(default="DEFAULT")
+
+    class Meta:
+        app_label = "app"
+
+
+class CustomBuilderField(models.Model):
+    custom = CustomCharField(max_length=200)
 
     class Meta:
         app_label = "app"

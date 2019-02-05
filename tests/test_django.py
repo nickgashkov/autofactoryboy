@@ -20,6 +20,7 @@ from django.test import utils
 
 from autofactory.django import autofactory
 
+from tests.app.factories_custom import CustomBuilderFieldFactory
 from tests.app.factories import (
     EveryFieldTypeFactory,
     WithDeclaredFieldFactory,
@@ -171,3 +172,8 @@ class DjangoTestCase(test.TestCase):
 
         self.assertIsNotNone(with_default_tuple_fields.string)
         self.assertEqual(with_default_tuple_fields.string_with_default, "DEFAULT")
+
+    def test_autofactory_builds_custom_field_if_provided_in_registry(self):
+        custom_builder_field = CustomBuilderFieldFactory.create()
+
+        self.assertEqual(custom_builder_field.custom, "CUSTOM_FIELD")

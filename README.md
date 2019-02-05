@@ -108,6 +108,46 @@ class ModelFactory(DjangoModelFactory):
         model = Model
 ```
 
+### How do I teach AutoFactoryBoy to automatically make my custom field 
+
+Make a custom builder...
+
+```python
+# models.py
+class Model:
+    custom = CustomField()
+
+# builders.py
+def build_custom_field(field_cls):
+    ...
+```
+
+...register it...
+
+```python
+from autofactory.django.registry import DjangoRegistry
+
+class MyDjangoRegistry(DjangoRegistry):
+    @property
+    def builder_mapping(self):
+        mapping = super(MyDjangoRegistry, self).builder_mapping
+        mapping[CustomField] = build_custom_field
+
+        return mapping
+```
+...and override `_register_class` chain:
+
+```python
+from autofactory.django.options import DjangoAutoOptions
+from autofactory.django.factories import DjangoModelAutoFactory
+
+class MyDjangoAutoOptions(DjangoAutoOptions):
+    _registry_class = MyDjangoRegistry
+
+class MyDjangoModelAutoFactory(DjangoModelAutoFactory):
+    _options_class = MyDjangoAutoOptions
+```
+
 ## Testing
 
 To test, run:
