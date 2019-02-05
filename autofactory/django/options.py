@@ -10,10 +10,12 @@ from factory.django import DjangoOptions
 
 from autofactory.django import compat
 from autofactory.django.introspector import DjangoIntrospector
+from autofactory.django.registry import DjangoRegistry
 
 
 class DjangoAutoOptions(DjangoOptions):
     _introspector_class = DjangoIntrospector
+    _registry_class = DjangoRegistry
 
     @property
     def declarations(self):
@@ -23,7 +25,10 @@ class DjangoAutoOptions(DjangoOptions):
         return declarations
 
     def get_introspector(self):
-        return self._introspector_class(self.model)
+        return self._introspector_class(self.model, self.get_registry())
+
+    def get_registry(self):
+        return self._registry_class()
 
     def get_autodeclarations(self, declarations):
         introspecter = self.get_introspector()
