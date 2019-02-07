@@ -86,6 +86,18 @@ class WithDefault(models.Model):
         app_label = "app"
 
 
+class WithChoiceField(models.Model):
+    CHOICES = (
+        ("__CHOICE_ONE__", "__CHOICE_ONE__"),
+        ("__CHOICE_TWO__", "__CHOICE_TWO__"),
+    )
+
+    string_with_choices = models.CharField(max_length=500, choices=CHOICES)
+
+    class Meta:
+        app_label = "app"
+
+
 class CustomBuilderField(models.Model):
     custom = CustomCharField(max_length=200)
 

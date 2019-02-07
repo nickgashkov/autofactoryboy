@@ -29,8 +29,9 @@ from tests.app.factories import (
     WithCustomThroughFactory,
     WithDefaultAllFieldsFactory,
     WithDefaultTupleFieldsFactory,
+    WithChoiceFieldFactory,
 )
-from tests.app.models import EveryFieldType, CustomThrough
+from tests.app.models import EveryFieldType, CustomThrough, WithChoiceField
 
 test_state = dict()
 
@@ -161,17 +162,20 @@ class DjangoTestCase(test.TestCase):
         self.assertNotIn(None, through_list)
         self.assertNotIn("", through_list)
 
-    def test_autofactory_does_not_create_declaration_for_field_with_a_default_all_fields(self):
+    def test_autofactory_takes_default_for_a_field_instead_of_a_random_value(self):
         with_default_all_fields = WithDefaultAllFieldsFactory.create()
-
-        self.assertIsNotNone(with_default_all_fields.string)
-        self.assertEqual(with_default_all_fields.string_with_default, "DEFAULT")
-
-    def test_autofactory_does_not_create_declaration_for_field_with_a_default_tuple_fields(self):
         with_default_tuple_fields = WithDefaultTupleFieldsFactory.create()
 
+        self.assertIsNotNone(with_default_all_fields.string)
         self.assertIsNotNone(with_default_tuple_fields.string)
+
+        self.assertEqual(with_default_all_fields.string_with_default, "DEFAULT")
         self.assertEqual(with_default_tuple_fields.string_with_default, "DEFAULT")
+
+    def test_autofactory_takes_a_random_choice_if_field_has_it(self):
+        with_choice_field = WithChoiceFieldFactory.create()
+
+        self.assertIn(with_choice_field.string_with_choices, WithChoiceField.CHOICES)
 
     def test_autofactory_builds_custom_field_if_provided_in_registry(self):
         custom_builder_field = CustomBuilderFieldFactory.create()

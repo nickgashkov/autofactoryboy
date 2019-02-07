@@ -1,5 +1,8 @@
 from autofactory.django import DjangoModelAutoFactory
-from tests.app.models import EveryFieldType, WithDeclaredField, WithBlankField, WithCustomThrough, WithDefault
+from tests.app.models import (
+    EveryFieldType, WithDeclaredField, WithBlankField,
+    WithCustomThrough, WithDefault, WithChoiceField,
+)
 
 
 class EveryFieldTypeFactory(DjangoModelAutoFactory):
@@ -78,3 +81,9 @@ class WithDefaultTupleFieldsFactory(DjangoModelAutoFactory):
     class Meta:
         model = WithDefault
         fields = ("string", "string_with_default")
+
+
+class WithChoiceFieldFactory(DjangoModelAutoFactory):
+    class Meta:
+        model = WithChoiceField
+        fields = "__all__"
