@@ -27,5 +27,8 @@ class Registry(UserDict):
 
         return decorator
 
+    def unregister(self, key):
+        self.pop(key, None)
+
     def _register(self, key, value):
         self.data[key] = value

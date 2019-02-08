@@ -18,7 +18,8 @@ from django.conf import settings
 from django.test.runner import DiscoverRunner
 from django.test import utils
 
-from autofactory.django import autofactory
+from autofactory.django import autofactory, DjangoModelAutoFactory, builders
+from autofactory.django.registry import registry, FROM_DEFAULT
 
 from tests.app.factories_custom import CustomBuilderFieldFactory
 from tests.app.factories import (
@@ -31,7 +32,12 @@ from tests.app.factories import (
     WithDefaultTupleFieldsFactory,
     WithChoiceFieldFactory,
 )
-from tests.app.models import EveryFieldType, CustomThrough, WithChoiceField
+from tests.app.models import (
+    CustomThrough,
+    EveryFieldType,
+    WithChoiceField,
+    WithDefault,
+)
 
 test_state = dict()
 
@@ -181,3 +187,23 @@ class DjangoTestCase(test.TestCase):
         custom_builder_field = CustomBuilderFieldFactory.create()
 
         self.assertEqual(custom_builder_field.custom, "CUSTOM_FIELD")
+
+    def test_patching_registry_changes_builders(self):
+        def setUp():
+            # Has to be this way to encapsulate test.
+            registry.register(FROM_DEFAULT, lambda x: "PATCHED DEFAULT")
+
+        def tearDown():
+            registry.register(FROM_DEFAULT, builders.from_default)
+
+        setUp()
+
+        class PatchedDefaultFactory(DjangoModelAutoFactory):
+            class Meta:
+                model = WithDefault
+                fields = "__all__"
+
+        with_default = PatchedDefaultFactory.create()
+        self.assertEqual(with_default.string_with_default, "PATCHED DEFAULT")
+
+        tearDown()
