@@ -3,11 +3,19 @@
 [![Build Status](https://travis-ci.org/nickgashkov/autofactoryboy.svg?branch=master)](https://travis-ci.org/nickgashkov/autofactoryboy)
 [![PyPI Package](https://img.shields.io/pypi/v/autofactory.svg)](https://pypi.org/project/autofactory/)
 
-> **Warning!** Current version of *AutoFactoryBoy* supports only 
-[Django](https://github.com/django/django) backend.
+> **Warning!** *AutoFactoryBoy* supports only 
+[Django](https://github.com/django/django) backend for now.
 
-*AutoFactoryBoy* introspects Django's models and generates a factory with all 
-not blank fields.
+*AutoFactoryBoy* introspects ORM models and generates factories.
+
+## Contents
+* [Installation](#installation)
+* [Quickstart](#quickstart)
+* [Compatibility](#compatibility)
+* [Q & A](#q--a)
+* [Testing](#testing)
+* [License](#license)
+* [Acknowledgments](#acknowledgments)
 
 ## Installation
 
@@ -40,7 +48,7 @@ There are a couple of options to create an `AutoFactory` for a model:
             model = Model
             fields = "__all__"
     
-    model = ModelFactory.create()
+    model = ModelFactory.create(some__field__to__change=42)
     ```
 
 2. Make a factory right from the model with the help of a
@@ -52,7 +60,7 @@ shortcut:
     from models import Model
     
     model_factory = autofactory(Model)
-    model = model_factory.create()
+    model = model_factory.create(some__field__to__change=42)
     ```
 
 ## Compatibility
@@ -67,10 +75,10 @@ shortcut:
 
 ## Q & A
 
-### How do I specify fields to generate automatically?
+### How do I make an autofactory with specific fields?
 
 *AutoFactoryBoy* will generate a `ModelFactory` for a model with fields, 
-specified in the `ModelFactory.Meta`:
+declared in the `ModelFactory.Meta`:
 
 ```python
 class ModelFactory(DjangoModelAutoFactory):
@@ -93,13 +101,14 @@ class ModelFactory(DjangoModelFactory):
 ### How do I make an autofactory with all model fields?
 
 You can set `fields` to a special value (i.e. `__all__`) and all fields with 
-`blank=False` will be generated automatically:
+`blank=False` and without `default` will be generated automatically:
 
 ```python
 # models.py
 class Model(models.Model):
     integer = models.IntegerField(blank=True, null=True)
-    string = models.CharField()
+    text = models.TextField(default="Default")
+    string = models.CharField(max_length=20)
 
 # factories.py
 class ModelFactory(DjangoModelAutoFactory):
@@ -112,15 +121,15 @@ The code snippet above is identical to:
 
 ```python
 class ModelFactory(DjangoModelFactory):
-    string = factory.Faker("text")
+    string = factory.Faker("text", max_nb_chars=20)
 
     class Meta:
         model = Model
 ```
 
-### How do I teach AutoFactoryBoy to automatically make my custom field 
+### How do I teach AutoFactoryBoy how to generate my custom field 
 
-Make a custom builder and register it with decorator:
+Make a custom builder and register it with decorator or as a function:
 
 ```python
 # models.py
@@ -133,6 +142,47 @@ from autofactory.django.registry import registry
 @registry.register(CustomField)
 def build_custom_field(field_cls):
     ...
+
+registry.register(CustomField, build_custom_field)
+```
+
+**Warning!** Order is important. Make sure, that you register all 
+custom fields *before* any factory declaration. I.e.:
+
+```python
+from autofactory.django.registry import registry, FROM_DEFAULT
+from autofactory.django import autofactory, DjangoModelAutoFactory
+
+from models import Model
+
+
+# Register first.
+registry.register(FROM_DEFAULT, lambda x: "Default for everything")
+
+
+# Declare second.
+class ModelFactory(DjangoModelAutoFactory):
+    class Meta:
+        model = Model
+        fields = "__all__"
+
+model_factory = autofactory(Model)
+``` 
+
+### How do I override AutoFactoryBoy field builder 
+
+`autofactory.django.registry.registry` for the rescue! Using the 
+approach above, you can redeclare builder for any field:
+
+```python
+from autofactory.django.registry import registry
+
+from django.db import models
+
+
+@registry.register(models.CharField)
+def custom_char_field_builder(field_cls):
+    ...
 ```
 
 ## Testing
@@ -143,3 +193,12 @@ To test, run:
 $ make test      # Current environment
 $ make test-tox  # All tox environments
 ```
+
+## License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) 
+file for details.
+
+## Acknowledgments
+
+* [factory_boy](https://github.com/FactoryBoy/factory_boy)
