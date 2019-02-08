@@ -4,7 +4,7 @@
 [![PyPI Package](https://img.shields.io/pypi/v/autofactory.svg)](https://pypi.org/project/autofactory/)
 
 > **Warning!** *AutoFactoryBoy* supports only 
-[Django](https://github.com/django/django) backend for now.
+[Django](https://github.com/django/django) ORM for now.
 
 *AutoFactoryBoy* introspects ORM models and generates factories.
 
