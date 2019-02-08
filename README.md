@@ -55,6 +55,16 @@ shortcut:
     model = model_factory.create()
     ```
 
+## Compatibility
+
+| Python | Django         | SQLAlchemy | Mogo | mongoengine |
+| ------ | -------------- | ---------- | ---- | ----------- |
+| 2.7    | 1.11           | —          | —    | —           |
+| 3.4    | 1.11, 2.0      | —          | —    | —           |
+| 3.5    | 1.11, 2.0, 2.1 | —          | —    | —           |
+| 3.6    | 1.11, 2.0, 2.1 | —          | —    | —           |
+| 3.7    | 1.11, 2.0, 2.1 | —          | —    | —           |
+
 ## Q & A
 
 ### How do I specify fields to generate automatically?
