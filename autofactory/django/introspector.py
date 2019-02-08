@@ -6,10 +6,11 @@
 from __future__ import unicode_literals
 
 from autofactory.django import compat
+from autofactory.django.registry import registry, FROM_CHOICES, FROM_DEFAULT
 
 
 class DjangoIntrospector(object):
-    def __init__(self, model, registry):
+    def __init__(self, model):
         self.model = model
         self.registry = registry
 
@@ -37,16 +38,16 @@ class DjangoIntrospector(object):
 
     def _get_concrete_builder(self, field):
         if getattr(field, "choices", tuple()):
-            return self.registry.builder_from_choices
+            return self.registry.get(FROM_CHOICES)
 
         if field.has_default():
-            return self.registry.builder_from_default
+            return self.registry.get(FROM_DEFAULT)
 
         return None
 
     def _get_generic_builder(self, field):
         field_cls = type(field)
-        field_builder = self.registry.builder_mapping.get(field_cls)
+        field_builder = self.registry.get(field_cls)
 
         if field_builder is None:
             raise TypeError(
