@@ -5,16 +5,17 @@
 # Distributed under MIT License. See LICENSE file for details.
 from __future__ import unicode_literals
 
+from autofactory.django.factories import DjangoModelAutoFactory
+from autofactory.django.shortcuts import autofactory
+
 try:
-    import django
+    pass
 except ImportError as e:
     raise ImportError(
         "Couldn't import Django. AutoFactoryBoy x Django won't work if "
         "Django is not installed."
     )
 
-from autofactory.django.shortcuts import autofactory
-from autofactory.django.factories import DjangoModelAutoFactory
 
 __all__ = (
     "autofactory",

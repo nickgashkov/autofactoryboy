@@ -6,7 +6,7 @@
 from __future__ import unicode_literals
 
 from autofactory.django import compat
-from autofactory.django.registry import registry, FROM_CHOICES, FROM_DEFAULT
+from autofactory.django.registry import FROM_CHOICES, FROM_DEFAULT, registry
 
 
 class DjangoIntrospector(object):

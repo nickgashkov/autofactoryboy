@@ -1,8 +1,9 @@
+from __future__ import unicode_literals
+
 from django.db import models
 
 from autofactory.core.registry import Registry
 from autofactory.django import builders
-
 
 FROM_CHOICES = object()
 FROM_DEFAULT = object()
@@ -10,9 +11,11 @@ FROM_DEFAULT = object()
 
 registry = Registry()
 
+# Concrete builders.
 registry.register(FROM_CHOICES, builders.from_choices)
 registry.register(FROM_DEFAULT, builders.from_default)
 
+# Generic builders.
 registry.register(models.BooleanField, builders.build_booleanfield)
 registry.register(models.NullBooleanField, builders.build_nullbooleanfield)
 registry.register(models.DateField, builders.build_datefield)
