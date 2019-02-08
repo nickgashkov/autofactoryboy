@@ -137,7 +137,7 @@ class Model:
     custom = CustomField()
 
 # builders.py
-from autofactory.django.registry import registry
+from autofactory.django.builders import registry
 
 @registry.register(CustomField)
 def build_custom_field(field_cls):
@@ -150,7 +150,7 @@ registry.register(CustomField, build_custom_field)
 custom fields *before* any factory declaration. I.e.:
 
 ```python
-from autofactory.django.registry import registry, FROM_DEFAULT
+from autofactory.django.builders import registry, FROM_DEFAULT
 from autofactory.django import autofactory, DjangoModelAutoFactory
 
 from models import Model
@@ -175,7 +175,7 @@ model_factory = autofactory(Model)
 approach above, you can redeclare builder for any field:
 
 ```python
-from autofactory.django.registry import registry
+from autofactory.django.builders import registry
 
 from django.db import models
 

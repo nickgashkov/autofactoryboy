@@ -5,6 +5,9 @@
 # Distributed under MIT License. See LICENSE file for details.
 from __future__ import unicode_literals
 
+from django.db import models
+
+from autofactory.core.registry import Registry
 from autofactory.django.builders.booleans import (
     build_booleanfield,
     build_nullbooleanfield,
@@ -47,6 +50,11 @@ from autofactory.django.builders.strings import (
 )
 
 __all__ = (
+    "registry",
+    "FROM_CHOICES",
+    "FROM_DEFAULT",
+    "from_choices",
+    "from_default",
     "build_bigintegerfield",
     "build_binaryfield",
     "build_booleanfield",
@@ -74,6 +82,44 @@ __all__ = (
     "build_foreignkey",
     "build_manytomanyfield",
     "build_onetoonefield",
-    "from_choices",
-    "from_default",
 )
+
+
+FROM_CHOICES = object()
+FROM_DEFAULT = object()
+
+
+registry = Registry()
+
+# Concrete builders.
+registry.register(FROM_CHOICES, from_choices)
+registry.register(FROM_DEFAULT, from_default)
+
+# Generic builders.
+registry.register(models.BooleanField, build_booleanfield)
+registry.register(models.NullBooleanField, build_nullbooleanfield)
+registry.register(models.DateField, build_datefield)
+registry.register(models.DateTimeField, build_datetimefield)
+registry.register(models.DurationField, build_durationfield)
+registry.register(models.TimeField, build_timefield)
+registry.register(models.BinaryField, build_binaryfield)
+registry.register(models.FileField, build_filefield)
+registry.register(models.FilePathField, build_filepathfield)
+registry.register(models.ImageField, build_imagefield)
+registry.register(models.BigIntegerField, build_bigintegerfield)
+registry.register(models.DecimalField, build_decimalfield)
+registry.register(models.FloatField, build_floatfield)
+registry.register(models.IntegerField, build_integerfield)
+registry.register(models.PositiveIntegerField, build_positiveintegerfield)
+registry.register(models.PositiveSmallIntegerField, build_positivesmallintegerfield)
+registry.register(models.SmallIntegerField, build_smallintegerfield)
+registry.register(models.ForeignKey, build_foreignkey)
+registry.register(models.ManyToManyField, build_manytomanyfield)
+registry.register(models.OneToOneField, build_onetoonefield)
+registry.register(models.CharField, build_charfield)
+registry.register(models.EmailField, build_emailfield)
+registry.register(models.GenericIPAddressField, build_genericipaddressfield)
+registry.register(models.SlugField, build_slugfield)
+registry.register(models.TextField, build_textfield)
+registry.register(models.URLField, build_urlfield)
+registry.register(models.UUIDField, build_uuidfield)

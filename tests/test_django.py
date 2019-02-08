@@ -19,7 +19,7 @@ from django.test.runner import DiscoverRunner
 from django.test import utils
 
 from autofactory.django import autofactory, DjangoModelAutoFactory, builders
-from autofactory.django.registry import registry, FROM_DEFAULT
+from autofactory.django.builders import registry, FROM_DEFAULT
 
 from tests.app.factories_custom import CustomBuilderFieldFactory
 from tests.app.factories import (

@@ -6,7 +6,7 @@
 from __future__ import unicode_literals
 
 from autofactory.django import DjangoModelAutoFactory
-from autofactory.django.registry import registry
+from autofactory.django.builders import registry
 
 from tests.app.models import CustomCharField, CustomBuilderField
 

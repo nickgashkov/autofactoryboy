@@ -5,14 +5,13 @@
 # Distributed under MIT License. See LICENSE file for details.
 from __future__ import unicode_literals
 
-from autofactory.django import compat
-from autofactory.django.registry import FROM_CHOICES, FROM_DEFAULT, registry
+from autofactory.django import builders, compat
 
 
 class DjangoIntrospector(object):
     def __init__(self, model):
         self.model = model
-        self.registry = registry
+        self.registry = builders.registry
 
     def build_all(self, fields):
         declarations = dict()
@@ -38,10 +37,10 @@ class DjangoIntrospector(object):
 
     def _get_concrete_builder(self, field):
         if getattr(field, "choices", tuple()):
-            return self.registry.get(FROM_CHOICES)
+            return self.registry.get(builders.FROM_CHOICES)
 
         if field.has_default():
-            return self.registry.get(FROM_DEFAULT)
+            return self.registry.get(builders.FROM_DEFAULT)
 
         return None
 
