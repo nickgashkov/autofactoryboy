@@ -13,7 +13,7 @@
 * [Quickstart](#quickstart)
 * [Compatibility](#compatibility)
 * [Q & A](#q--a)
-* [Testing](#testing)
+* [Contributing](#contributing)
 * [License](#license)
 * [Acknowledgments](#acknowledgments)
 
@@ -185,7 +185,26 @@ def custom_char_field_builder(field_cls):
     ...
 ```
 
-## Testing
+## Contributing
+
+### Dependencies
+
+To install dev dependencies, run:
+
+```bash
+$ pip install pip-tools
+$ make upgrade
+```
+
+### Code formatting
+
+To format the code, run:
+
+```bash
+$ make 
+```
+
+### Testing
 
 To test, run:
 
