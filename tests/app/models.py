@@ -90,8 +90,8 @@ class WithDefault(models.Model):
 
 class WithChoiceField(models.Model):
     CHOICES = (
-        ("__CHOICE_ONE__", "__CHOICE_ONE__"),
-        ("__CHOICE_TWO__", "__CHOICE_TWO__"),
+        ("__CHOICE_ONE_VALUE__", "__CHOICE_ONE_HUMAN_NAME__"),
+        ("__CHOICE_TWO_VALUE__", "__CHOICE_TWO_HUMAN_NAME__"),
     )
 
     string_with_choices = models.CharField(max_length=500, choices=CHOICES)

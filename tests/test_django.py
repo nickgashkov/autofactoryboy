@@ -182,7 +182,12 @@ class DjangoTestCase(test.TestCase):
     def test_autofactory_takes_a_random_choice_if_field_has_it(self):
         with_choice_field = WithChoiceFieldFactory.create()
 
-        self.assertIn(with_choice_field.string_with_choices, WithChoiceField.CHOICES)
+        self.assertIn("VALUE", with_choice_field.string_with_choices)
+        self.assertNotIn("HUMAN_NAME", with_choice_field.string_with_choices)
+        self.assertIn(
+            with_choice_field.string_with_choices,
+            [c[0] for c in WithChoiceField.CHOICES],
+        )
 
     def test_autofactory_builds_custom_field_if_provided_in_registry(self):
         custom_builder_field = CustomBuilderFieldFactory.create()

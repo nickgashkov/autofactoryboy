@@ -10,7 +10,7 @@ from factory import fuzzy
 
 
 def from_choices(field_cls):
-    return fuzzy.FuzzyChoice(field_cls.choices)
+    return fuzzy.FuzzyChoice([c[0] for c in field_cls.choices])
 
 
 def from_default(field_cls):
