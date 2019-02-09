@@ -207,3 +207,8 @@ class DjangoTestCase(test.TestCase):
         self.assertEqual(with_default.string_with_default, "PATCHED DEFAULT")
 
         tearDown()
+
+    def test_autofactory_from_shortcut_has_classname_like_ModelFactory(self):
+        with_default_factory = autofactory(WithDefault)
+
+        self.assertEqual(with_default_factory.__name__, "WithDefaultFactory")
