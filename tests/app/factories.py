@@ -9,7 +9,7 @@ from autofactory.django import DjangoModelAutoFactory
 from tests.app.models import (
     EveryFieldType, WithDeclaredField, WithBlankField,
     WithCustomThrough, WithDefault, WithChoiceField,
-    WithExclude)
+    WithExclude, WithDefaultAndChoices)
 
 
 class EveryFieldTypeFactory(DjangoModelAutoFactory):
@@ -111,4 +111,10 @@ class WithExcludeFactory(DjangoModelAutoFactory):
 class WithoutExcludeFactory(DjangoModelAutoFactory):
     class Meta:
         model = WithExclude
+        autofields = "__all__"
+
+
+class WithDefaultAndChoicesFactory(DjangoModelAutoFactory):
+    class Meta:
+        model = WithDefaultAndChoices
         autofields = "__all__"

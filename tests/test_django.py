@@ -32,7 +32,7 @@ from tests.app.factories import (
     WithDefaultAllFieldsFactory,
     WithDefaultTupleFieldsFactory,
     WithChoiceFieldFactory,
-    WithExcludeFactory, WithoutExcludeFactory, WithBlankFieldAndExcludeFactory)
+    WithExcludeFactory, WithoutExcludeFactory, WithBlankFieldAndExcludeFactory, WithDefaultAndChoicesFactory)
 from tests.app.models import (
     CustomThrough,
     EveryFieldType,
@@ -256,3 +256,8 @@ class DjangoTestCase(test.TestCase):
 
         self.assertIsNone(with_blank_field_and_exclude.can_be_blank)
         self.assertIsNone(with_blank_field_and_exclude.cannot_be_blank)
+
+    def test_autofactory_prioritises_default_over_choices(self):
+        with_default_and_choices = WithDefaultAndChoicesFactory.create()
+
+        self.assertEqual(with_default_and_choices.field, 4)

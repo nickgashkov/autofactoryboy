@@ -4,13 +4,14 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 - **Breaking change.** Rename `DjangoModelAutoFactory.Meta.fields` into
 `DjangoModelAutoFactory.Meta.autofields`.
-- *Add* `DjangoModelAutoFactory.Meta.autoexclude`.
-- *Change* generated with `autofactory` name from `GeneratedModelFactory` to 
+- Add `DjangoModelAutoFactory.Meta.autoexclude`.
+- Change generated with `autofactory` name from `GeneratedModelFactory` to 
 `ModelFactory`.
-- *Change* `models.CharField` Faker generator from `text` to `pystr`.
-- *Fix* callable as a `django.db.models.Field.default` not being called on 
+- Change `models.CharField` Faker generator from `text` to `pystr`.
+- Change priority of `from_choices` and `from_default` builders.
+- Fix callable as a `django.db.models.Field.default` not being called on 
 instance generation.
-- *Fix* `from_choices` filling a choice tuple into field instead of the database
+- Fix `from_choices` filling a choice tuple into field instead of the database
 value.
 
 ## [0.2.0] — 2019-02-08

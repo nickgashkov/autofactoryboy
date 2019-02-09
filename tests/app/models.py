@@ -124,3 +124,21 @@ class WithExclude(models.Model):
 
     class Meta:
         app_label = "app"
+
+
+class WithDefaultAndChoices(models.Model):
+    CHOICES = (
+        (1, "CHOICE_ONE"),
+        (2, "CHOICE_TWO"),
+        (3, "CHOICE_THREE"),
+    )
+
+    field = models.IntegerField(
+        blank=False,
+        null=True,
+        choices=CHOICES,
+        default=4,
+    )
+
+    class Meta:
+        app_label = "app"

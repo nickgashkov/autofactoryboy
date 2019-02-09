@@ -36,11 +36,11 @@ class DjangoIntrospector(object):
         return self._get_generic_builder(field)
 
     def _get_concrete_builder(self, field):
-        if getattr(field, "choices", tuple()):
-            return self.registry.get(builders.FROM_CHOICES)
-
         if field.has_default():
             return self.registry.get(builders.FROM_DEFAULT)
+
+        if getattr(field, "choices", tuple()):
+            return self.registry.get(builders.FROM_CHOICES)
 
         return None
 
