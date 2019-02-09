@@ -42,12 +42,24 @@ class DjangoAutoOptions(DjangoOptions):
         if self.autofields == "__all__":
             return self._get_not_blank_fields(all_fields)
 
+        if self.autoexclude:
+            return filter(lambda x: x.name not in self.autoexclude, all_fields)
+
         return filter(lambda x: x.name in self.autofields, all_fields)
+
 
     def _build_default_options(self):
         return super(DjangoAutoOptions, self)._build_default_options() + [
             OptionDefault("autofields", tuple(), inherit=True),
+            OptionDefault("autoexclude", tuple(), inherit=True),
         ]
+
+    def _fill_from_meta(self, meta, base_meta):
+        super(DjangoAutoOptions, self)._fill_from_meta(meta, base_meta)
+
+        assert not (self.autofields and self.autoexclude), (
+            "Cannot set 'autofields' and 'autoexclude' at the same time"
+        )
 
     def _get_all_fields(self):
         return compat.get_all_fields(self.model)

@@ -116,3 +116,11 @@ class WithDefaultCallable(models.Model):
 
     class Meta:
         app_label = "app"
+
+
+class WithExclude(models.Model):
+    field = models.IntegerField(blank=False, null=True)
+    excluded_field = models.IntegerField(blank=False, null=True)
+
+    class Meta:
+        app_label = "app"

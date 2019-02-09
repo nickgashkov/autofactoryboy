@@ -32,7 +32,7 @@ from tests.app.factories import (
     WithDefaultAllFieldsFactory,
     WithDefaultTupleFieldsFactory,
     WithChoiceFieldFactory,
-)
+    WithExcludeFactory, WithoutExcludeFactory)
 from tests.app.models import (
     CustomThrough,
     EveryFieldType,
@@ -227,3 +227,26 @@ class DjangoTestCase(test.TestCase):
             with_default_callable.datetime_with_default_callable,
             datetime.datetime.fromtimestamp(0),
         )
+
+    def test_autofactory_restricts_to_set_autofields_and_autoexclude_at_the_same_time(self):
+        with self.assertRaises(AssertionError) as cm:
+            class AutofieldsAutoexcludeFactory(DjangoModelAutoFactory):
+                class Meta:
+                    model = WithDefault
+                    autofields = ("string",)
+                    autoexclude = ("string_with_default",)
+
+        self.assertEqual(
+            cm.exception.args[0],
+            "Cannot set 'autofields' and 'autoexclude' at the same time",
+        )
+
+    def test_autofactory_does_not_autodeclare_fields_from_exclude(self):
+        with_exclude = WithExcludeFactory.create()
+        without_exclude = WithoutExcludeFactory.create()
+
+        self.assertIsNone(with_exclude.excluded_field)
+        self.assertIsNotNone(with_exclude.field)
+
+        self.assertIsNotNone(without_exclude.excluded_field)
+        self.assertIsNotNone(without_exclude.field)

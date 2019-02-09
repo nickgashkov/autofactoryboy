@@ -2,14 +2,15 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
-- Change generated with `autofactory` name from `GeneratedModelFactory` to 
-`ModelFactory`.
-- Fix callable as a `django.db.models.Field.default` not being called on 
-instance generation.
-- Fix `from_choices` filling a choice tuple into field instead of the database
-value.
 - **Breaking change.** Rename `DjangoModelAutoFactory.Meta.fields` into
 `DjangoModelAutoFactory.Meta.autofields`.
+- *Add* `DjangoModelAutoFactory.Meta.autoexclude`.
+- *Change* generated with `autofactory` name from `GeneratedModelFactory` to 
+`ModelFactory`.
+- *Fix* callable as a `django.db.models.Field.default` not being called on 
+instance generation.
+- *Fix* `from_choices` filling a choice tuple into field instead of the database
+value.
 
 ## [0.2.0] — 2019-02-08
 - Add builders registry for Django ORM.
