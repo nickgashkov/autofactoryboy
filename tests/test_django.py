@@ -5,6 +5,7 @@
 # Distributed under MIT License. See LICENSE file for details.
 from __future__ import unicode_literals
 
+import datetime
 import os
 import shutil
 
@@ -37,7 +38,7 @@ from tests.app.models import (
     EveryFieldType,
     WithChoiceField,
     WithDefault,
-)
+    WithDefaultCallable)
 
 test_state = dict()
 
@@ -212,3 +213,12 @@ class DjangoTestCase(test.TestCase):
         with_default_factory = autofactory(WithDefault)
 
         self.assertEqual(with_default_factory.__name__, "WithDefaultFactory")
+
+    def test_autofactory_calls_a_default_if_it_is_callable(self):
+        with_default_callable_factory = autofactory(WithDefaultCallable)
+        with_default_callable = with_default_callable_factory.create()
+
+        self.assertEqual(
+            with_default_callable.datetime_with_default_callable,
+            datetime.datetime.fromtimestamp(0),
+        )

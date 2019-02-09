@@ -5,6 +5,8 @@
 # Distributed under MIT License. See LICENSE file for details.
 from __future__ import unicode_literals
 
+import datetime
+
 from django.db import models
 
 
@@ -100,6 +102,17 @@ class WithChoiceField(models.Model):
 
 class CustomBuilderField(models.Model):
     custom = CustomCharField(max_length=200)
+
+    class Meta:
+        app_label = "app"
+
+
+def beginning_of_time():
+    return datetime.datetime.fromtimestamp(0)
+
+
+class WithDefaultCallable(models.Model):
+    datetime_with_default_callable = models.DateTimeField(default=beginning_of_time)
 
     class Meta:
         app_label = "app"
