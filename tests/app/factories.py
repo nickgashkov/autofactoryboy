@@ -72,6 +72,12 @@ class WithBlankFieldAndNotAllFieldsFactory(DjangoModelAutoFactory):
         autofields = ("can_be_blank", "cannot_be_blank")
 
 
+class WithBlankFieldAndExcludeFactory(DjangoModelAutoFactory):
+    class Meta:
+        model = WithBlankField
+        autoexclude = ("cannot_be_blank",)
+
+
 class WithCustomThroughFactory(DjangoModelAutoFactory):
     class Meta:
         model = WithCustomThrough

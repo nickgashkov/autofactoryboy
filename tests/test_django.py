@@ -32,7 +32,7 @@ from tests.app.factories import (
     WithDefaultAllFieldsFactory,
     WithDefaultTupleFieldsFactory,
     WithChoiceFieldFactory,
-    WithExcludeFactory, WithoutExcludeFactory)
+    WithExcludeFactory, WithoutExcludeFactory, WithBlankFieldAndExcludeFactory)
 from tests.app.models import (
     CustomThrough,
     EveryFieldType,
@@ -250,3 +250,9 @@ class DjangoTestCase(test.TestCase):
 
         self.assertIsNotNone(without_exclude.excluded_field)
         self.assertIsNotNone(without_exclude.field)
+
+    def test_autofactory_does_not_declare_blank_fields_if_autoexclude_is_used(self):
+        with_blank_field_and_exclude = WithBlankFieldAndExcludeFactory.create()
+
+        self.assertIsNone(with_blank_field_and_exclude.can_be_blank)
+        self.assertIsNone(with_blank_field_and_exclude.cannot_be_blank)

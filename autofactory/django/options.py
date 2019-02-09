@@ -38,12 +38,16 @@ class DjangoAutoOptions(DjangoOptions):
 
     def get_fields_to_autodeclare(self):
         all_fields = self._get_all_fields()
+        not_blank_fields = self._get_not_blank_fields(all_fields)
 
         if self.autofields == "__all__":
-            return self._get_not_blank_fields(all_fields)
+            return not_blank_fields
 
         if self.autoexclude:
-            return filter(lambda x: x.name not in self.autoexclude, all_fields)
+            return filter(
+                lambda x: x.name not in self.autoexclude,
+                not_blank_fields,
+            )
 
         return filter(lambda x: x.name in self.autofields, all_fields)
 

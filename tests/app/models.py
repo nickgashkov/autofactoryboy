@@ -57,7 +57,7 @@ class WithDeclaredField(models.Model):
 
 class WithBlankField(models.Model):
     can_be_blank = models.IntegerField(blank=True, null=True)
-    cannot_be_blank = models.IntegerField()
+    cannot_be_blank = models.IntegerField(null=True)
 
     class Meta:
         app_label = "app"
