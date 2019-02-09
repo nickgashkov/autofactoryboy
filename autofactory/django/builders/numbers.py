@@ -30,6 +30,8 @@ def build_floatfield(field_cls):
     return factory.Faker("pyfloat")
 
 
+# WTF: `pyint` is everywhere because it is always [0..9999].
+
 def build_integerfield(field_cls):
     return factory.Faker("pyint")
 

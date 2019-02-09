@@ -47,7 +47,6 @@ class DjangoAutoOptions(DjangoOptions):
 
         return filter(lambda x: x.name in self.autofields, all_fields)
 
-
     def _build_default_options(self):
         return super(DjangoAutoOptions, self)._build_default_options() + [
             OptionDefault("autofields", tuple(), inherit=True),

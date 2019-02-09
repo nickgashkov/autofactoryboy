@@ -46,7 +46,7 @@ There are a couple of options to create an `AutoFactory` for a model:
     class ModelFactory(DjangoModelAutoFactory):
         class Meta:
             model = Model
-            fields = "__all__"
+            autofields = "__all__"
     
     model = ModelFactory.create(some__field__to__change=42)
     ```
@@ -84,7 +84,7 @@ declared in the `ModelFactory.Meta`:
 class ModelFactory(DjangoModelAutoFactory):
     class Meta:
         model = Model
-        fields = ("integer", "string")
+        autofields = ("integer", "string")
 ```
 
 The code snippet above is identical to:
@@ -114,7 +114,7 @@ class Model(models.Model):
 class ModelFactory(DjangoModelAutoFactory):
     class Meta:
         model = Model
-        fields = "__all__"
+        autofields = "__all__"
 ```
 
 The code snippet above is identical to:
@@ -126,6 +126,36 @@ class ModelFactory(DjangoModelFactory):
     class Meta:
         model = Model
 ```
+
+### How do I make an autofactory with all model fields except one
+
+You can add the field you want to exclude to the `Meta.autoexclude` tuple:
+
+```python
+# models.py
+class Model(models.Model):
+    field = models.IntegerField(blank=False, null=True)
+    field_to_exclude = models.IntegerField(blank=False, null=True)
+
+# factories.py
+class ModelFactory(DjangoModelAutoFactory):
+    class Meta:
+        model = Model
+        autoexclude = ("field_to_exclude",)
+```
+
+The code snippet above is identical to:
+
+```python
+class ModelFactory(DjangoModelFactory):
+    field = factory.Faker("pyint")
+
+    class Meta:
+        model = Model
+```
+
+> **Warning!** One cannot set `autofields` and `autoexclude` for one factory at
+the same time.
 
 ### How do I teach AutoFactoryBoy how to generate my custom field 
 
@@ -164,14 +194,14 @@ registry.register(FROM_DEFAULT, lambda x: "Default for everything")
 class ModelFactory(DjangoModelAutoFactory):
     class Meta:
         model = Model
-        fields = "__all__"
+        autofields = "__all__"
 
 model_factory = autofactory(Model)
 ``` 
 
 ### How do I override AutoFactoryBoy field builder 
 
-`autofactory.django.registry.registry` for the rescue! Using the 
+`autofactory.django.builders.registry` for the rescue! Using the 
 approach above, you can redeclare builder for any field:
 
 ```python
