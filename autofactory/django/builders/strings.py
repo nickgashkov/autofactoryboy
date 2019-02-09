@@ -9,7 +9,7 @@ import factory
 
 
 def build_charfield(field_cls):
-    return factory.Faker("text", max_nb_chars=field_cls.max_length)
+    return factory.Faker("pystr", max_chars=field_cls.max_length)
 
 
 def build_emailfield(field_cls):

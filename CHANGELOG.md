@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 - *Add* `DjangoModelAutoFactory.Meta.autoexclude`.
 - *Change* generated with `autofactory` name from `GeneratedModelFactory` to 
 `ModelFactory`.
+- *Change* `models.CharField` Faker generator from `text` to `pystr`.
 - *Fix* callable as a `django.db.models.Field.default` not being called on 
 instance generation.
 - *Fix* `from_choices` filling a choice tuple into field instead of the database
