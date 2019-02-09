@@ -207,7 +207,7 @@ class DjangoTestCase(test.TestCase):
         class PatchedDefaultFactory(DjangoModelAutoFactory):
             class Meta:
                 model = WithDefault
-                fields = "__all__"
+                autofields = "__all__"
 
         with_default = PatchedDefaultFactory.create()
         self.assertEqual(with_default.string_with_default, "PATCHED DEFAULT")

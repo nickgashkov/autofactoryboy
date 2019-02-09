@@ -39,14 +39,14 @@ class DjangoAutoOptions(DjangoOptions):
     def get_fields_to_autodeclare(self):
         all_fields = self._get_all_fields()
 
-        if self.fields == "__all__":
+        if self.autofields == "__all__":
             return self._get_not_blank_fields(all_fields)
 
-        return filter(lambda x: x.name in self.fields, all_fields)
+        return filter(lambda x: x.name in self.autofields, all_fields)
 
     def _build_default_options(self):
         return super(DjangoAutoOptions, self)._build_default_options() + [
-            OptionDefault("fields", tuple(), inherit=True),
+            OptionDefault("autofields", tuple(), inherit=True),
         ]
 
     def _get_all_fields(self):

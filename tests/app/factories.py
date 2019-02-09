@@ -15,7 +15,7 @@ from tests.app.models import (
 class EveryFieldTypeFactory(DjangoModelAutoFactory):
     class Meta:
         model = EveryFieldType
-        fields = (
+        autofields = (
             "bigintegerfield",
             "binaryfield",
             "booleanfield",
@@ -49,7 +49,7 @@ class EveryFieldTypeFactory(DjangoModelAutoFactory):
 class WithoutBlankEveryFieldTypeFactory(DjangoModelAutoFactory):
     class Meta:
         model = EveryFieldType
-        fields = "__all__"
+        autofields = "__all__"
 
 
 class WithDeclaredFieldFactory(DjangoModelAutoFactory):
@@ -57,40 +57,40 @@ class WithDeclaredFieldFactory(DjangoModelAutoFactory):
 
     class Meta:
         model = WithDeclaredField
-        fields = "__all__"
+        autofields = "__all__"
 
 
 class WithBlankFieldAndAllFieldsFactory(DjangoModelAutoFactory):
     class Meta:
         model = WithBlankField
-        fields = "__all__"
+        autofields = "__all__"
 
 
 class WithBlankFieldAndNotAllFieldsFactory(DjangoModelAutoFactory):
     class Meta:
         model = WithBlankField
-        fields = ("can_be_blank", "cannot_be_blank")
+        autofields = ("can_be_blank", "cannot_be_blank")
 
 
 class WithCustomThroughFactory(DjangoModelAutoFactory):
     class Meta:
         model = WithCustomThrough
-        fields = ("custom_through_m2m",)
+        autofields = ("custom_through_m2m",)
 
 
 class WithDefaultAllFieldsFactory(DjangoModelAutoFactory):
     class Meta:
         model = WithDefault
-        fields = "__all__"
+        autofields = "__all__"
 
 
 class WithDefaultTupleFieldsFactory(DjangoModelAutoFactory):
     class Meta:
         model = WithDefault
-        fields = ("string", "string_with_default")
+        autofields = ("string", "string_with_default")
 
 
 class WithChoiceFieldFactory(DjangoModelAutoFactory):
     class Meta:
         model = WithChoiceField
-        fields = "__all__"
+        autofields = "__all__"

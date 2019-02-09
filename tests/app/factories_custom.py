@@ -19,4 +19,4 @@ def build_custom_char_field(field_cls):
 class CustomBuilderFieldFactory(DjangoModelAutoFactory):
     class Meta:
         model = CustomBuilderField
-        fields = "__all__"
+        autofields = "__all__"
