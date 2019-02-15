@@ -23,6 +23,6 @@ value.
 ## 0.1.0 — 2019-02-03
 - Add Django ORM support.
 
-[Unreleased]: https://github.com/nickgashkov/autofactoryboy/compare/v0.3.0...HEAD
-[0.3.0]: https://github.com/nickgashkov/autofactoryboy/compare/v0.3.0...v0.2.0
-[0.2.0]: https://github.com/nickgashkov/autofactoryboy/compare/v0.2.0...v0.1.0
+[Unreleased]: https://github.com/nickgashkov/autofactoryboy/compare/HEAD...v0.3.0
+[0.3.0]: https://github.com/nickgashkov/autofactoryboy/compare/v0.2.0...v0.3.0
+[0.2.0]: https://github.com/nickgashkov/autofactoryboy/compare/v0.1.0...v0.2.0
