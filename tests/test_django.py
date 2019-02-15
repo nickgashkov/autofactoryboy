@@ -38,7 +38,9 @@ from tests.app.models import (
     EveryFieldType,
     WithChoiceField,
     WithDefault,
-    WithDefaultCallable)
+    WithDefaultCallable,
+    One,
+)
 
 test_state = dict()
 
@@ -261,3 +263,16 @@ class DjangoTestCase(test.TestCase):
         with_default_and_choices = WithDefaultAndChoicesFactory.create()
 
         self.assertEqual(with_default_and_choices.field, 4)
+
+    def test_autofactory_complains_on_circular_dependencies_between_factories(self):
+        with self.assertRaises(RuntimeError) as cm:
+            class WithCircularDependencyFactory(DjangoModelAutoFactory):
+                class Meta:
+                    model = One
+                    autofields = "__all__"
+
+        self.assertEqual(
+            cm.exception.args[0],
+            "Cannot build factories with circular dependencies. If "
+            "One.two is nullable, add two = None to the factory."
+        )

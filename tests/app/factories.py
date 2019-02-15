@@ -9,7 +9,8 @@ from autofactory.django import DjangoModelAutoFactory
 from tests.app.models import (
     EveryFieldType, WithDeclaredField, WithBlankField,
     WithCustomThrough, WithDefault, WithChoiceField,
-    WithExclude, WithDefaultAndChoices)
+    WithExclude, WithDefaultAndChoices
+)
 
 
 class EveryFieldTypeFactory(DjangoModelAutoFactory):

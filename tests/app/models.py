@@ -142,3 +142,17 @@ class WithDefaultAndChoices(models.Model):
 
     class Meta:
         app_label = "app"
+
+
+class One(models.Model):
+    two = models.ForeignKey("Two", on_delete=models.CASCADE)
+
+    class Meta:
+        app_label = "app"
+
+
+class Two(models.Model):
+    one = models.ForeignKey("One", on_delete=models.CASCADE)
+
+    class Meta:
+        app_label = "app"
