@@ -27,7 +27,10 @@ def build_slugfield(field_cls):
 
 
 def build_textfield(field_cls):
-    return factory.Faker("text", max_nb_chars=field_cls.max_length)
+    if field_cls.max_length is not None:
+        return factory.Faker("text", max_nb_chars=field_cls.max_length)
+
+    return factory.Faker("text")
 
 
 def build_urlfield(field_cls):
