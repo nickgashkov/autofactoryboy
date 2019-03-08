@@ -9,6 +9,8 @@ import factory
 
 
 def build_charfield(field_cls):
+    # FAQ: `pystr` is used insted of `text` because `text` provider may
+    # contain newlines. For a text-like data `TextField` should be used.
     return factory.Faker("pystr", max_chars=field_cls.max_length)
 
 
@@ -25,7 +27,7 @@ def build_slugfield(field_cls):
 
 
 def build_textfield(field_cls):
-    return factory.Faker("text")
+    return factory.Faker("text", max_nb_chars=field_cls.max_length)
 
 
 def build_urlfield(field_cls):

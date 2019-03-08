@@ -7,7 +7,7 @@ from __future__ import unicode_literals
 
 import factory
 
-# `factory.Faker("pyint")` is a random integer ranges from 0 to 9999, so it
+# FAQ: `pyint` is everywhere because it is always [0..9999], so it
 # will be good enough for every integer-related field.
 
 
@@ -29,8 +29,6 @@ def build_decimalfield(field_cls):
 def build_floatfield(field_cls):
     return factory.Faker("pyfloat")
 
-
-# WTF: `pyint` is everywhere because it is always [0..9999].
 
 def build_integerfield(field_cls):
     return factory.Faker("pyint")
