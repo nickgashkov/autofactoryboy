@@ -9,4 +9,4 @@ from autofactory.django.maker import make_django_autofactory
 
 
 def autofactory(instance):
-    return make_django_autofactory(instance)
+    return make_django_autofactory(instance, use_cache=False)
