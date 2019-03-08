@@ -16,7 +16,7 @@ class DjangoIntrospector(object):
     def build_all(self, fields):
         declarations = dict()
 
-        for field in filter(self._is_concrete_field, fields):
+        for field in compat.get_concrete_fields(fields):
             declarations[field.name] = self.build(field)
 
         return declarations
@@ -50,12 +50,12 @@ class DjangoIntrospector(object):
 
         if field_builder is None:
             raise TypeError(
+                "AutoFactoryBoy cannot generate '{model}.{field}', "
                 "'{field_cls}' is not supported.".format(
+                    model=self.model.__name__,
+                    field=field.name,
                     field_cls=field_cls.__name__,
                 )
             )
 
         return field_builder
-
-    def _is_concrete_field(self, field):
-        return field.__class__ not in compat.get_generic_fields()

@@ -21,6 +21,13 @@ def get_generic_fields():
     ]
 
 
+def get_concrete_fields(fields):
+    generic_fields = get_generic_fields()
+    concrete_fields = [f for f in fields if f.__class__ not in generic_fields]
+
+    return concrete_fields
+
+
 def get_related_model(field_cls):
     return field_cls.remote_field.model
 
