@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 - Add complain on circular relationship dependency.
 - Change `build_textfield` to respect `field_cls.max_length`.
 - Add caching for automatically built factories.
+- Add PR Template for a new release.
 
 ## [0.3.0] — 2019-02-09
 - **Breaking change.** Rename `DjangoModelAutoFactory.Meta.fields` into
