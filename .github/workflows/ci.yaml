@@ -1,0 +1,46 @@
+name: ci
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+    container: python:3.8-slim
+    strategy:
+      matrix:
+        python: [3.5, 3.6, 3.7, 3.8]
+        django: [2.2, 3.0, 3.1, 3.2]
+        exclude:
+          - python: 3.5
+            django: [3.0, 3.1, 3.2]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements-dev.out') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+            ${{ runner.os }}-
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements-dev.out
+
+      - name: Lint
+      - uses: docker://github/super-linter:v2.1.0
+
+      - name: Test
+        run: pytest
