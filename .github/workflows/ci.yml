@@ -40,11 +40,10 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install dependencies
-        run: |
-          pip install -r requirements-dev.out
+        run: pip install -r requirements-dev.out
 
       - name: Lint
-      - uses: docker://github/super-linter:v2.1.0
+        uses: docker://github/super-linter:v2.1.0
 
       - name: Test
         run: pytest
